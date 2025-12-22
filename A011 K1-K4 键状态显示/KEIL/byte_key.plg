@@ -1,0 +1,18 @@
+<html>
+<body>
+<pre>
+<h1>µVision2 Build Log</h1>
+<h2>Project:</h2>
+C:\Documents and Settings\Administrator\×ÀÃæ\A011A012\KEIL\byte_key.uv2
+Project File Date:  08/03/2013
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling delay.c...
+compiling main.c...
+compiling system_init.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY1MS?DELAY
+Program Size: data=9.0 xdata=0 code=35
+"byte_key" - 0 Error(s), 1 Warning(s).

@@ -1,0 +1,42 @@
+C51 COMPILER V7.06   SYSTEM_INIT                                                           08/03/2013 15:26:39 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE SYSTEM_INIT
+OBJECT MODULE PLACED IN .\OUTPUT\system_init.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE SRC\system_init.c BROWSE DEBUG OBJECTEXTEND PRINT(.\system_init.lst) OBJECT
+                    -(.\OUTPUT\system_init.obj)
+
+stmt level    source
+
+   1          /************************************************************************************************** 
+   2          system_init.c:系统初始化程序，初值设定、芯片初始化入LCD等
+   3          
+   4          ***************************************************************************************************/
+   5          
+   6          #include "config.h"
+   7          
+   8                  
+   9          
+  10          void system_init(void)
+  11          {
+  12   1              led8_red=0xfe;
+  13   1              led8_gre=0xfe;
+  14   1      
+  15   1              P0=led8_red;
+  16   1              P2=led8_gre;
+  17   1      
+  18   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     13    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,42 @@
+C51 COMPILER V7.06   STA_KEY                                                               08/03/2013 22:26:14 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE STA_KEY
+OBJECT MODULE PLACED IN .\OUTPUT\sta_key.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE SRC\sta_key.c BROWSE DEBUG OBJECTEXTEND PRINT(.\sta_key.lst) OBJECT(.\OUTPU
+                    -T\sta_key.obj)
+
+stmt level    source
+
+   1          /**********************************************
+   2          sta_key.c:按键状态显示程序文件
+   3          void sta_key();按键状态显示函数
+   4          
+   5          **********************************************/
+   6          
+   7          
+   8          #include "config.h"
+   9          
+  10          
+  11          void sta_key()
+  12          {
+  13   1              if(v_key==0x0e){P0=0xfe;}//K1键按下，D1亮
+  14   1              if(v_key==0x0d){P0=0xfd;}//K2键按下，D2亮
+  15   1              if(v_key==0x0b){P0=0xfb;}//K3键按下，D3亮
+  16   1              if(v_key==0x07){P0=0xf7;}//K4键按下，D4亮
+  17   1              if(v_key==0x0f){P0=0xff;}//按键释放或者没有键按下，灯灭
+  18   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     41    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

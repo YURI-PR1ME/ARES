@@ -1,0 +1,46 @@
+C51 COMPILER V7.06   EX_INT0                                                               08/29/2013 23:36:46 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE EX_INT0
+OBJECT MODULE PLACED IN .\OUTPUT\ex_int0.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE SRC\ex_int0.c BROWSE DEBUG OBJECTEXTEND PRINT(.\ex_int0.lst) OBJECT(.\OUTPU
+                    -T\ex_int0.obj)
+
+stmt level    source
+
+   1          /***************************************
+   2          ex_int0.c:外部中断0的中断处理程序
+   3          ex_int0() interrupt 0 using 0:中断处理函数
+   4          init_ex_int0():int0外部中断初始化。
+   5          ****************************************/
+   6          
+   7          
+   8          #include "config.h"
+   9          
+  10          void init_ex_int0()
+  11          {
+  12   1              EA=1;//中断总开关
+  13   1              EX0=1;//外部中断0开关
+  14   1              
+  15   1          IT0=0;//使用中断的初始化,1下降沿触发，0是低电平触发
+  16   1      }
+  17          
+  18          
+  19          void ex_int0() interrupt 0 using 0
+  20          {
+  21   1              num++;//中断计数
+  22   1      } 
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     10    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

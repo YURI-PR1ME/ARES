@@ -1,0 +1,176 @@
+BL51 BANKED LINKER/LOCATER V5.03                                                        09/16/2013  00:44:15  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.03, INVOKED BY:
+F:\KEIL\C51\BIN\BL51.EXE .\OUTPUT\main.obj, .\OUTPUT\system_init.obj, .\OUTPUT\timer0_int.obj TO .\OUTPUT\a028 PRINT (.\
+>> a028.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\OUTPUT\main.obj (MAIN)
+  .\OUTPUT\system_init.obj (SYSTEM_INIT)
+  .\OUTPUT\timer0_int.obj (TIMER0_INT)
+  F:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\OUTPUT\a028 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         ?DT?SYSTEM_INIT
+            IDATA   000BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0005H     UNIT         ?PR?MAIN?MAIN
+                    0008H     0003H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     004DH     UNIT         ?PR?TIMER0_INT?TIMER0_INT
+            CODE    005BH     0010H     UNIT         ?PR?INIT_TIMER0_INT?TIMER0_INT
+            CODE    006BH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0077H     000BH     UNIT         ?PR?SYSTEM_INIT?SYSTEM_INIT
+
+
+
+OVERLAY MAP OF MODULE:   .\OUTPUT\a028 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?SYSTEM_INIT?SYSTEM_INIT
+
+?PR?SYSTEM_INIT?SYSTEM_INIT
+  +--> ?PR?INIT_TIMER0_INT?TIMER0_INT
+
+
+
+SYMBOL TABLE OF MODULE:  .\OUTPUT\a028 (MAIN)
+
+  VALUE           TYPE          NAME
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/16/2013  00:44:15  PAGE 2
+
+
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:0003H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:0003H         LINE#         18
+  C:0003H         LINE#         19
+  C:0003H         LINE#         21
+  C:0006H         LINE#         23
+  C:0006H         LINE#         24
+  C:0006H         LINE#         26
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        SYSTEM_INIT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0077H         PUBLIC        system_init
+  D:00C8H         PUBLIC        T2CON
+  D:0008H         PUBLIC        i
+  D:0009H         PUBLIC        j
+  D:000AH         PUBLIC        k
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          SYSTEM_INIT
+  C:0077H         LINE#         13
+  C:0077H         LINE#         14
+  C:0077H         LINE#         18
+  C:007AH         LINE#         19
+  C:007DH         LINE#         20
+  C:007FH         LINE#         21
+  C:0081H         LINE#         22
+  -------         ENDPROC       SYSTEM_INIT
+  -------         ENDMOD        SYSTEM_INIT
+
+  -------         MODULE        TIMER0_INT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  C:000EH         PUBLIC        timer0_int
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+BL51 BANKED LINKER/LOCATER V5.03                                                      09/16/2013  00:44:15  PAGE 3
+
+
+  D:00A8H         PUBLIC        IE
+  C:005BH         PUBLIC        init_timer0_int
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  B:0080H.0       PUBLIC        led1
+  D:00C8H         PUBLIC        T2CON
+  B:0080H.1       PUBLIC        led2
+  B:0080H.2       PUBLIC        led3
+  B:0080H.3       PUBLIC        led4
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          INIT_TIMER0_INT
+  C:005BH         LINE#         14
+  C:005BH         LINE#         15
+  C:005BH         LINE#         16
+  C:005EH         LINE#         17
+  C:0061H         LINE#         18
+  C:0064H         LINE#         19
+  C:0066H         LINE#         20
+  C:0068H         LINE#         21
+  C:006AH         LINE#         22
+  -------         ENDPROC       INIT_TIMER0_INT
+  -------         PROC          TIMER0_INT
+  C:000EH         LINE#         25
+  C:0012H         LINE#         27
+  C:001BH         LINE#         28
+  C:001EH         LINE#         29
+  C:002DH         LINE#         30
+  C:002DH         LINE#         31
+  C:002FH         LINE#         32
+  C:0031H         LINE#         33
+  C:0033H         LINE#         34
+  C:0035H         LINE#         35
+  C:0037H         LINE#         36
+  C:0039H         LINE#         37
+  C:003BH         LINE#         38
+  C:003BH         LINE#         39
+  C:0044H         LINE#         40
+  C:0047H         LINE#         41
+  C:004AH         LINE#         42
+  C:004CH         LINE#         43
+  C:0056H         LINE#         44
+  -------         ENDPROC       TIMER0_INT
+  -------         ENDMOD        TIMER0_INT
+
+Program Size: data=12.0 xdata=0 code=127
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

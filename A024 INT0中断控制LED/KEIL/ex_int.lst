@@ -1,0 +1,57 @@
+C51 COMPILER V7.06   EX_INT                                                                09/02/2013 22:16:51 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE EX_INT
+OBJECT MODULE PLACED IN .\OUTPUT\ex_int.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE SRC\ex_int.c BROWSE DEBUG OBJECTEXTEND PRINT(.\ex_int.lst) OBJECT(.\OUTPUT\
+                    -ex_int.obj)
+
+stmt level    source
+
+   1          /**************************************************
+   2          ex_int.c:外部中断程序文件
+   3          void init_ex_int0(void):外部中断0的初始化函数
+   4          void init_ex_int1(void):外部中断1的初始化函数
+   5          void ex_int0() interrupt 0:外部中断0中断函数
+   6          void ex_int1() interrupt 2:外部中断1中断函数
+   7          ***************************************************/
+   8          
+   9          #include "config.h"
+  10          
+  11          void init_ex_int0(void)
+  12          {
+  13   1              EA=1;//1、开中断总开关
+  14   1              EX0=1;//2、开使用中断分开关
+  15   1              IT0=1;//3、设置外部中断信号的触发方式;1下降沿，0低电平
+  16   1      }
+  17          
+  18          void init_ex_int1(void)
+  19          {
+  20   1              EA=1;//1、开中断总开关
+  21   1              EX1=1;//2、开使用中断分开关
+  22   1              IT1=1;//3、设置外部中断信号的触发方式;1下降沿，0低电平
+  23   1      }
+  24          
+  25          void ex_int0() interrupt 0
+  26          {
+  27   1              led=~led;       
+  28   1      }
+  29          
+  30          void ex_int1() interrupt 2
+  31          {
+  32   1              lamp=~lamp;     
+  33   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     20    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

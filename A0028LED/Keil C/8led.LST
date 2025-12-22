@@ -1,0 +1,79 @@
+C51 COMPILER V7.06   8LED                                                                  07/16/2013 12:41:04 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 8LED
+OBJECT MODULE PLACED IN 8led.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE 8led.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          /********************************************************************************************
+   2          项目名称：A002 来回流水的6个LED灯。
+   3          项目负责人：林工  QQ2923105955   博客：http://blog.sina.com.cn/lgmcu
+   4          程序版本：V1.0，2013年7月16日
+   5          版本修改内容：
+   6          *********************************************************************************************/
+   7          
+   8          //加载头文件
+   9          #include "reg52.h"
+  10          #include "intrins.h"
+  11          
+  12          
+  13          
+  14          
+  15          //宏定义
+  16          #define uint8 unsigned int
+  17          #define uch8 unsigned char
+  18          
+  19          
+  20          //单片IO口配置
+  21          sbit led=P1^0;
+  22          
+  23          //函数声明
+  24          void delay(uint8 a);
+  25          
+  26          
+  27          void main()
+  28          {
+  29   1              uch8 i;
+  30   1          P2=0x01;//0000 0001
+  31   1              while(1)
+  32   1              {
+  33   2                      for(i=7;i>0;i--)//0000 0010，1000 0000
+  34   2                      {
+  35   3                              delay(150);
+  36   3                              P2=_crol_(P2,1);
+  37   3                      }
+  38   2              for(i=7;i>0;i--)
+  39   2                      {
+  40   3                              delay(150);
+  41   3                              P2=_cror_(P2,1);
+  42   3                      }
+  43   2      
+  44   2              }
+  45   1      }
+  46          
+  47          void delay(uint8 a)
+  48          {
+  49   1              uint8 b;
+  50   1              while(a--)
+  51   1              {
+  52   2                      for(b=120;b>0;b--);
+  53   2              }
+  54   1      }
+
+C51 COMPILER V7.06   8LED                                                                  07/16/2013 12:41:04 PAGE 2   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    100    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

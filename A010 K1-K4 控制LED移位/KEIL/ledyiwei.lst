@@ -1,0 +1,61 @@
+C51 COMPILER V7.06   LEDYIWEI                                                              08/03/2013 15:26:39 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE LEDYIWEI
+OBJECT MODULE PLACED IN .\OUTPUT\ledyiwei.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE SRC\ledyiwei.c BROWSE DEBUG OBJECTEXTEND PRINT(.\ledyiwei.lst) OBJECT(.\OUT
+                    -PUT\ledyiwei.obj)
+
+stmt level    source
+
+   1          /********************************************
+   2          ledyiwei.c:通过按键K1KK3K4控制LED移位点亮
+   3          void ledyiwei();通过按键K1KK3K4控制LED移位点亮
+   4          *********************************************/
+   5          
+   6          #include "config.h"
+   7          #include "intrins.h"
+   8          
+   9          uch8 led8_red,led8_gre;
+  10          
+  11          void ledyiwei()
+  12          {
+  13   1              if(key1==1)//k1控制红色LED向下移位点亮
+  14   1              {
+  15   2                      led8_red=_crol_(led8_red,1);//移位
+  16   2                      P0=led8_red;                //输出控制码点亮
+  17   2              }
+  18   1      
+  19   1              if(key2==1)//K2控制红色LED向上移位点亮
+  20   1              {
+  21   2                      led8_red=_cror_(led8_red,1);
+  22   2                      P0=led8_red;
+  23   2              }
+  24   1      
+  25   1              if(key3==1)//K3控制绿色LED向下移位点亮
+  26   1              {
+  27   2                      led8_gre=_crol_(led8_gre,1);
+  28   2                      P2=led8_gre;
+  29   2              }
+  30   1      
+  31   1              if(key4==1)//K4控制绿色LED向上移位点亮
+  32   1              {
+  33   2                      led8_gre=_cror_(led8_gre,1);
+  34   2                      P2=led8_gre;
+  35   2              }
+  36   1      
+  37   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     73    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

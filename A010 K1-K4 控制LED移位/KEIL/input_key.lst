@@ -1,0 +1,129 @@
+C51 COMPILER V7.06   INPUT_KEY                                                             08/03/2013 15:26:39 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE INPUT_KEY
+OBJECT MODULE PLACED IN .\OUTPUT\input_key.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE SRC\input_key.c BROWSE DEBUG OBJECTEXTEND PRINT(.\input_key.lst) OBJECT(.\O
+                    -UTPUT\input_key.obj)
+
+stmt level    source
+
+   1          /*************************************************
+   2          **input_key.c:属于独立按键输入检测程序文件
+   3          **bit input_k1(),检测K1按键的程序
+   4          **bit input_k2(),检测K2按键的程序
+   5          **bit input_k3(),检测K3按键的程序
+   6          **bit input_k4(),检测K4按键的程序
+   7          **************************************************/
+   8          
+   9          #include "config.h"
+  10          
+  11          bit key1,key2,key3,key4;//k1-k4键值
+  12          
+  13          bit input_k1()
+  14          {
+  15   1                      
+  16   1              k1=1;//0、要先给端口写1
+  17   1              if(k1==0)//1、判断按键按下
+  18   1              { 
+  19   2                      delay1ms(15);//2、延时消除抖动
+  20   2                  if(k1==0)//3、再次判断这个按键是否按下
+  21   2                      {
+  22   3                              while(!k1);//4、检测按键释放
+  23   3                  return(1);//5、返回键值
+  24   3                      }
+  25   2                      else
+  26   2                      {
+  27   3                              return(0);
+  28   3                      }
+  29   2              }
+  30   1              else
+  31   1              {
+  32   2                      return(0);
+  33   2              }
+  34   1      }
+  35          
+  36          bit input_k2()
+  37          {
+  38   1                      
+  39   1              k2=1;//0、要先给端口写1
+  40   1              if(k2==0)//1、判断按键按下
+  41   1              { 
+  42   2                      delay1ms(15);//2、延时消除抖动
+  43   2                  if(k2==0)//3、再次判断这个按键是否按下
+  44   2                      {
+  45   3                              while(!k2);//4、检测按键释放
+  46   3                  return(1);//5、返回键值
+  47   3                      }
+  48   2                      else
+  49   2                      {
+  50   3                              return(0);
+  51   3                      }
+  52   2              }
+  53   1              else
+  54   1              {
+C51 COMPILER V7.06   INPUT_KEY                                                             08/03/2013 15:26:39 PAGE 2   
+
+  55   2                      return(0);
+  56   2              }
+  57   1      }
+  58          
+  59          bit input_k3()
+  60          {
+  61   1                      
+  62   1              k3=1;//0、要先给端口写1
+  63   1              if(k3==0)//1、判断按键按下
+  64   1              { 
+  65   2                      delay1ms(15);//2、延时消除抖动
+  66   2                  if(k3==0)//3、再次判断这个按键是否按下
+  67   2                      {
+  68   3                              while(!k3);//4、检测按键释放
+  69   3                  return(1);//5、返回键值
+  70   3                      }
+  71   2                      else
+  72   2                      {
+  73   3                              return(0);
+  74   3                      }
+  75   2              }
+  76   1              else
+  77   1              {
+  78   2                      return(0);
+  79   2              }
+  80   1      }
+  81          
+  82          bit input_k4()
+  83          {
+  84   1                      
+  85   1              k4=1;//0、要先给端口写1
+  86   1              if(k4==0)//1、判断按键按下
+  87   1              { 
+  88   2                      delay1ms(15);//2、延时消除抖动
+  89   2                  if(k4==0)//3、再次判断这个按键是否按下
+  90   2                      {
+  91   3                              while(!k4);//4、检测按键释放
+  92   3                  return(1);//5、返回键值
+  93   3                      }
+  94   2                      else
+  95   2                      {
+  96   3                              return(0);
+  97   3                      }
+  98   2              }
+  99   1              else
+ 100   1              {
+ 101   2                      return(0);
+ 102   2              }
+ 103   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     96    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      4    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
