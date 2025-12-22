@@ -1,0 +1,51 @@
+C51 COMPILER V7.06   DELAY                                                                 09/02/2013 21:55:34 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE DELAY
+OBJECT MODULE PLACED IN .\OUTPUT\delay.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE SRC\delay.c BROWSE DEBUG OBJECTEXTEND PRINT(.\delay.lst) OBJECT(.\OUTPUT\de
+                    -lay.obj)
+
+stmt level    source
+
+   1          /************************************************************************************************** 
+   2          delay.c:延时程序,z=1，时为1ms
+   3          ***************************************************************************************************/
+   4          
+   5          #include "config.h"
+   6          
+   7          /*****************************24MHZ z=1时精确延时1ms***********************************************/
+   8          void delay1ms(uint16 z)
+   9          {
+  10   1              uch8 x,y;
+  11   1              for(x=z; x>0; x--)
+  12   1                      for(y=235; y>0; y--);//235
+  13   1      }
+  14          /***************************************************************************************************/
+  15          
+  16          
+  17          /*---------------------------------------------------
+  18           uS延时函数，含有输入参数 unsigned char t，无返回值
+  19           unsigned char 是定义无符号字符变量，其值的范围是
+  20           0~255 这里使用晶振12M，精确延时请使用汇编,大致延时
+  21           长度如下 T=2xuS ,510us
+  22          ----------------------------------------------------*/
+  23          
+  24          void delay2us(uch8 x)
+  25          {
+  26   1              while(--x);
+  27   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     17    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

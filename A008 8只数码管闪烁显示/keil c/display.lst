@@ -1,0 +1,105 @@
+C51 COMPILER V7.06   DISPLAY                                                               07/19/2013 11:41:32 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE DISPLAY
+OBJECT MODULE PLACED IN .\output\display.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE src\display.c BROWSE DEBUG OBJECTEXTEND PRINT(.\display.lst) OBJECT(.\outpu
+                    -t\display.obj)
+
+stmt level    source
+
+   1          /************************************************************************************************** 
+   2          input.h:¿ª¹ØÁ¿ÊäÈë³ÌÐòÈçµ¥¸ö°´¼ü£¬°´Å¥¡¢½Ó½ü¿ª¹ØµÈ
+   3          
+   4          ***************************************************************************************************/
+   5          
+   6          
+   7          #include "reg52.h"
+   8          #include "config.h"
+   9          #include "intrins.h"
+  10          
+  11          
+  12          
+  13          uch8 segcode[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0x88,0x83,0xc6,0xa1,0x86,0x8e};//¹²Ñô¼«Ï
+             -ÔÊ¾Âë
+  14          uint16 num_work=4267;
+  15          uch8 num[4];
+  16          
+  17          /**********************8Î»ÊýÂë¹ÜÉÁË¸ÏÔÊ¾º¯Êý***********************************/
+  18          void dis_8wseg_shansuo()
+  19          {       
+  20   1          uch8 i,en_seg,n;
+  21   1      
+  22   1          en_seg=0x01;//0000 0001
+  23   1              for(i=0;i<8;i++)
+  24   1              {
+  25   2                      P2=0x00;//¹Ø±ÕËùÓÐÎ»Ñ¡
+  26   2                      P0=segcode[i];//°ÑÐèÒªÏÔÊ¾µÄ×ÖÐÎÂëËÍÖÁP0¿Ú
+  27   2                      P2=en_seg;    //´ò¿ªÏàÓ¦ÊýÂë¹ÜÎ»Ñ¡¶Ë¿Ú
+  28   2                      delay1ms24m(1);//ÑÓÊ±1MS
+  29   2                      en_seg=_crol_(en_seg,1);//»ñÈ¡ÏÂÒ»´ÎÊýÂë¹ÜÊ¹ÄÜ²ÎÊý
+  30   2              }
+  31   1              
+  32   1              n++;
+  33   1              if(n==30)
+  34   1              {
+  35   2                      P2=0x00;//¹Ø±ÕËùÓÐÎ»Ñ¡
+  36   2                      P0=0xff;
+  37   2                      delay1ms24m(300);
+  38   2                      n=0;
+  39   2          }
+  40   1      
+  41   1      }
+  42          
+  43          /******************************************************************************/
+  44          
+  45          
+  46          /*******************************************************************/
+  47          void display()
+  48          {
+  49   1              uch8 i;
+  50   1              uch8 en_seg;
+  51   1      
+  52   1              en_seg=0x01;
+  53   1      /*      for(i=0;i<8;i++)
+C51 COMPILER V7.06   DISPLAY                                                               07/19/2013 11:41:32 PAGE 2   
+
+  54   1              {
+  55   1                      P2=0x00;
+  56   1                      P0=segcode[i];           //
+  57   1                      P2=en_seg;
+  58   1              delay1ms(1);
+  59   1              en_seg=_crol_(en_seg,1);
+  60   1              }
+  61   1      */
+  62   1          num[0]=num_work/1000;
+  63   1          num[1]=num_work%1000/100;
+  64   1          num[2]=num_work%100/10;
+  65   1          num[3]=num_work%10;
+  66   1      
+  67   1              for(i=0;i<4;i++)
+  68   1              {
+  69   2                      P2=0x00;
+  70   2                      P0=segcode[num[i]];
+  71   2              P2=en_seg;
+  72   2                      delay1ms(1);
+  73   2              en_seg=_crol_(en_seg,1);
+  74   2          }
+  75   1           
+  76   1      }
+  77          
+  78          /****************************************************************************/
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    205    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     22       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,205 @@
+BL51 BANKED LINKER/LOCATER V5.03                                                        08/03/2013  22:26:14  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V5.03, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE .\OUTPUT\delay.obj, .\OUTPUT\main.obj, .\OUTPUT\system_init.obj, .\OUTPUT\byte_key.obj, .\OUTPU
+>> T\sta_key.obj TO .\OUTPUT\byte_key PRINT (.\byte_key.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\OUTPUT\delay.obj (DELAY)
+  .\OUTPUT\main.obj (MAIN)
+  .\OUTPUT\system_init.obj (SYSTEM_INIT)
+  .\OUTPUT\byte_key.obj (BYTE_KEY)
+  .\OUTPUT\sta_key.obj (STA_KEY)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\OUTPUT\byte_key (DELAY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         ?DT?BYTE_KEY
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0029H     UNIT         ?PR?STA_KEY?STA_KEY
+            CODE    002CH     0026H     UNIT         ?PR?BYTE_KEY?BYTE_KEY
+            CODE    0052H     000EH     UNIT         ?PR?_DELAY1MS?DELAY
+            CODE    0060H     000DH     UNIT         ?PR?MAIN?MAIN
+            CODE    006DH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0079H     0001H     UNIT         ?PR?SYSTEM_INIT?SYSTEM_INIT
+
+
+
+OVERLAY MAP OF MODULE:   .\OUTPUT\byte_key (DELAY)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?SYSTEM_INIT?SYSTEM_INIT
+  +--> ?PR?BYTE_KEY?BYTE_KEY
+  +--> ?PR?STA_KEY?STA_KEY
+
+?PR?BYTE_KEY?BYTE_KEY
+  +--> ?PR?_DELAY1MS?DELAY
+
+
+
+BL51 BANKED LINKER/LOCATER V5.03                                                      08/03/2013  22:26:14  PAGE 2
+
+
+SYMBOL TABLE OF MODULE:  .\OUTPUT\byte_key (DELAY)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  C:0052H         PUBLIC        _delay1ms
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY1MS
+  D:0006H         SYMBOL        z
+  -------         DO            
+  D:0007H         SYMBOL        x
+  D:0006H         SYMBOL        y
+  -------         ENDDO         
+  C:0052H         LINE#         8
+  C:0052H         LINE#         9
+  C:0052H         LINE#         11
+  C:0058H         LINE#         12
+  C:005FH         LINE#         13
+  -------         ENDPROC       _DELAY1MS
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:0060H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:0060H         LINE#         20
+  C:0060H         LINE#         21
+  C:0060H         LINE#         22
+  C:0063H         LINE#         24
+  C:0063H         LINE#         25
+  C:0063H         LINE#         27
+  C:0068H         LINE#         29
+  C:006BH         LINE#         30
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        SYSTEM_INIT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+BL51 BANKED LINKER/LOCATER V5.03                                                      08/03/2013  22:26:14  PAGE 3
+
+
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0079H         PUBLIC        system_init
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          SYSTEM_INIT
+  C:0079H         LINE#         10
+  C:0079H         LINE#         11
+  C:0079H         LINE#         14
+  -------         ENDPROC       SYSTEM_INIT
+  -------         ENDMOD        SYSTEM_INIT
+
+  -------         MODULE        BYTE_KEY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0008H         PUBLIC        v_key
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:002CH         PUBLIC        byte_key
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          BYTE_KEY
+  -------         DO            
+  D:0007H         SYMBOL        v0_key
+  -------         ENDDO         
+  C:002CH         LINE#         10
+  C:002CH         LINE#         11
+  C:002CH         LINE#         14
+  C:002FH         LINE#         16
+  C:0037H         LINE#         17
+  C:0037H         LINE#         18
+  C:003EH         LINE#         20
+  C:0046H         LINE#         21
+  C:0046H         LINE#         22
+  C:004BH         LINE#         23
+  C:004CH         LINE#         26
+  C:004CH         LINE#         28
+  C:004CH         LINE#         29
+  C:004FH         LINE#         30
+  C:004FH         LINE#         31
+  C:004FH         LINE#         33
+  C:004FH         LINE#         34
+  C:0051H         LINE#         35
+  C:0051H         LINE#         36
+  -------         ENDPROC       BYTE_KEY
+  -------         ENDMOD        BYTE_KEY
+
+  -------         MODULE        STA_KEY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+BL51 BANKED LINKER/LOCATER V5.03                                                      08/03/2013  22:26:14  PAGE 4
+
+
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  C:0003H         PUBLIC        sta_key
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          STA_KEY
+  C:0003H         LINE#         11
+  C:0003H         LINE#         12
+  C:0003H         LINE#         13
+  C:000BH         LINE#         14
+  C:0013H         LINE#         15
+  C:001BH         LINE#         16
+  C:0023H         LINE#         17
+  C:002BH         LINE#         18
+  -------         ENDPROC       STA_KEY
+  -------         ENDMOD        STA_KEY
+
+Program Size: data=10.0 xdata=0 code=122
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

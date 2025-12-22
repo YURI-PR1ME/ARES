@@ -1,0 +1,342 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 12/20/2025 00:30:42 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\users\yuri\AppData\Local\Keil_C51\A\C51\BIN\A51.EXE main.a51 SET(SMALL) DEBUG PRINT(.\Listings\
+                      main.lst) OBJECT(.\Objects\main.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;==========================================================================
+                       2     ;====Power Disassembler for MCS-51 and 6502================================
+                       3     ;==========================================================================
+                       4     ;   Writen by: 覃远高
+                       5     ;   Copyright: 覃远高
+                       6     ;    HomePage: http://coolsh.163.net
+                       7     ;      E-mail: qinyg@163.net
+                       8     ;         Tel: 0755-2282553
+                       9     ;      Update: 3.Jul,2000
+                      10     ;==========================================================================
+                      11     ;===========Disassemble information========================================
+                      12     ;==========================================================================
+                      13     ;    File Name: C:\users\yuri\Desktop\ARES\A013NNNN\KEIL\KEY_SMG.hex
+                      14     ;      IC Body: MCS-51  
+                      15     ;         Date: 12/19/2025
+                      16     ;==========================================================================
+                      17     ;==========================================================================
+                      18     ;标号==============指令================================地址===机器码=======
+                      19     ;==========================================================================
+0000 020003           20     Q0000:             LJMP  Q0003                        ;0000   02 00 03
+                      21     ;==========================================================================
+0003 787F             22     Q0003:             MOV   R0,#7FH                      ;0003   78 7F
+0005 E4               23                        CLR   A                            ;0005   E4
+0006 F6               24     Q0006:             MOV   @R0,A                        ;0006   F6
+0007 D8FD             25                        DJNZ  R0,Q0006                     ;0007   D8 FD
+0009 75811C           26                        MOV   SP,#1CH                      ;0009   75 81 1C
+000C 02004A           27                        LJMP  Q004A                        ;000C   02 00 4A
+                      28     ;==========================================================================
+000F 020158           29     Q000F:             LJMP  Q0158                        ;000F   02 01 58
+                      30     ;==========================================================================
+0012 E4               31     Q0012:             CLR   A                            ;0012   E4
+0013 93               32                        MOVC  A,@A+DPTR                    ;0013   93
+0014 A3               33                        INC   DPTR                         ;0014   A3
+0015 F8               34                        MOV   R0,A                         ;0015   F8
+0016 E4               35     Q0016:             CLR   A                            ;0016   E4
+0017 93               36                        MOVC  A,@A+DPTR                    ;0017   93
+0018 A3               37                        INC   DPTR                         ;0018   A3
+0019 4003             38                        JC    Q001E                        ;0019   40 03
+001B F6               39                        MOV   @R0,A                        ;001B   F6
+001C 8001             40                        SJMP  Q001F                        ;001C   80 01
+001E F2               41     Q001E:             MOVX  @R0,A                        ;001E   F2
+001F 08               42     Q001F:             INC   R0                           ;001F   08
+0020 DFF4             43                        DJNZ  R7,Q0016                     ;0020   DF F4
+0022 8029             44                        SJMP  Q004D                        ;0022   80 29
+0024 E4               45     Q0024:             CLR   A                            ;0024   E4
+0025 93               46                        MOVC  A,@A+DPTR                    ;0025   93
+0026 A3               47                        INC   DPTR                         ;0026   A3
+0027 F8               48                        MOV   R0,A                         ;0027   F8
+0028 5407             49                        ANL   A,#07H                       ;0028   54 07
+002A 240C             50                        ADD   A,#0CH                       ;002A   24 0C
+002C C8               51                        XCH   A,R0                         ;002C   C8
+002D C3               52                        CLR   C                            ;002D   C3
+002E 33               53                        RLC   A                            ;002E   33
+002F C4               54                        SWAP  A                            ;002F   C4
+0030 540F             55                        ANL   A,#0FH                       ;0030   54 0F
+0032 4420             56                        ORL   A,#20H                       ;0032   44 20
+0034 C8               57                        XCH   A,R0                         ;0034   C8
+A51 MACRO ASSEMBLER  MAIN                                                                 12/20/2025 00:30:42 PAGE     2
+
+0035 83               58                        MOVC  A,@A+PC                      ;0035   83
+0036 4004             59                        JC    Q003C                        ;0036   40 04
+0038 F4               60                        CPL   A                            ;0038   F4
+0039 56               61                        ANL   A,@R0                        ;0039   56
+003A 8001             62                        SJMP  Q003D                        ;003A   80 01
+003C 46               63     Q003C:             ORL   A,@R0                        ;003C   46
+003D F6               64     Q003D:             MOV   @R0,A                        ;003D   F6
+003E DFE4             65                        DJNZ  R7,Q0024                     ;003E   DF E4
+0040 800B             66                        SJMP  Q004D                        ;0040   80 0B
+0042 0102             67                        AJMP  0002H                        ;0042   01 02
+0044 04               68                        INC   A                            ;0044   04
+0045 08               69                        INC   R0                           ;0045   08
+0046 102040           70                        JBC   24H.0,Q0089                  ;0046   10 20 40
+0049 80               71                         DB    80H                         ;0049   80 90
+004A 900176           72     Q004A:             MOV   DPTR,#0176H                  ;004A   90 01 76
+004D E4               73     Q004D:             CLR   A                            ;004D   E4
+004E 7E01             74                        MOV   R6,#01H                      ;004E   7E 01
+0050 93               75                        MOVC  A,@A+DPTR                    ;0050   93
+0051 60BC             76                        JZ    Q000F                        ;0051   60 BC
+0053 A3               77                        INC   DPTR                         ;0053   A3
+0054 FF               78                        MOV   R7,A                         ;0054   FF
+0055 543F             79                        ANL   A,#3FH                       ;0055   54 3F
+0057 30E509           80                        JNB   ACC.5,Q0063                  ;0057   30 E5 09
+005A 541F             81                        ANL   A,#1FH                       ;005A   54 1F
+005C FE               82                        MOV   R6,A                         ;005C   FE
+005D E4               83                        CLR   A                            ;005D   E4
+005E 93               84                        MOVC  A,@A+DPTR                    ;005E   93
+005F A3               85                        INC   DPTR                         ;005F   A3
+0060 6001             86                        JZ    Q0063                        ;0060   60 01
+0062 0E               87                        INC   R6                           ;0062   0E
+0063 CF               88     Q0063:             XCH   A,R7                         ;0063   CF
+0064 54C0             89                        ANL   A,#0C0H                      ;0064   54 C0
+0066 25E0             90                        ADD   A,ACC                        ;0066   25 E0
+0068 60A8             91                        JZ    Q0012                        ;0068   60 A8
+006A 40B8             92                        JC    Q0024                        ;006A   40 B8
+006C E4               93                        CLR   A                            ;006C   E4
+006D 93               94                        MOVC  A,@A+DPTR                    ;006D   93
+006E A3               95                        INC   DPTR                         ;006E   A3
+006F FA               96                        MOV   R2,A                         ;006F   FA
+0070 E4               97                        CLR   A                            ;0070   E4
+0071 93               98                        MOVC  A,@A+DPTR                    ;0071   93
+0072 A3               99                        INC   DPTR                         ;0072   A3
+0073 F8              100                        MOV   R0,A                         ;0073   F8
+0074 E4              101     Q0074:             CLR   A                            ;0074   E4
+0075 93              102                        MOVC  A,@A+DPTR                    ;0075   93
+0076 A3              103                        INC   DPTR                         ;0076   A3
+0077 C8              104                        XCH   A,R0                         ;0077   C8
+0078 C582            105                        XCH   A,DPL                        ;0078   C5 82
+007A C8              106                        XCH   A,R0                         ;007A   C8
+007B CA              107                        XCH   A,R2                         ;007B   CA
+007C C583            108                        XCH   A,DPH                        ;007C   C5 83
+007E CA              109                        XCH   A,R2                         ;007E   CA
+007F F0              110                        MOVX  @DPTR,A                      ;007F   F0
+0080 A3              111                        INC   DPTR                         ;0080   A3
+0081 C8              112                        XCH   A,R0                         ;0081   C8
+0082 C582            113                        XCH   A,DPL                        ;0082   C5 82
+0084 C8              114                        XCH   A,R0                         ;0084   C8
+0085 CA              115                        XCH   A,R2                         ;0085   CA
+0086 C583            116                        XCH   A,DPH                        ;0086   C5 83
+0088 CA              117                        XCH   A,R2                         ;0088   CA
+0089 DFE9            118     Q0089:             DJNZ  R7,Q0074                     ;0089   DF E9
+008B DEE7            119                        DJNZ  R6,Q0074                     ;008B   DE E7
+008D 80BE            120                        SJMP  Q004D                        ;008D   80 BE
+008F E51B            121     Q008F:             MOV   A,1BH                        ;008F   E5 1B
+0091 B40E13          122                        CJNE  A,#0EH,Q00A7                 ;0091   B4 0E 13
+0094 051C            123                        INC   1CH                          ;0094   05 1C
+A51 MACRO ASSEMBLER  MAIN                                                                 12/20/2025 00:30:42 PAGE     3
+
+0096 E51C            124                        MOV   A,1CH                        ;0096   E5 1C
+0098 D3              125                        SETB  C                            ;0098   D3
+0099 9407            126                        SUBB  A,#07H                       ;0099   94 07
+009B 4003            127                        JC    Q00A0                        ;009B   40 03
+009D 751C07          128                        MOV   1CH,#07H                     ;009D   75 1C 07
+00A0 7410            129     Q00A0:             MOV   A,#10H                       ;00A0   74 10
+00A2 251C            130                        ADD   A,1CH                        ;00A2   25 1C
+00A4 F8              131                        MOV   R0,A                         ;00A4   F8
+00A5 A61C            132                        MOV   @R0,1CH                      ;00A5   A6 1C
+00A7 E51B            133     Q00A7:             MOV   A,1BH                        ;00A7   E5 1B
+00A9 B40D10          134                        CJNE  A,#0DH,Q00BC                 ;00A9   B4 0D 10
+00AC E51C            135                        MOV   A,1CH                        ;00AC   E5 1C
+00AE D3              136                        SETB  C                            ;00AE   D3
+00AF 9400            137                        SUBB  A,#00H                       ;00AF   94 00
+00B1 4009            138                        JC    Q00BC                        ;00B1   40 09
+00B3 7410            139                        MOV   A,#10H                       ;00B3   74 10
+00B5 251C            140                        ADD   A,1CH                        ;00B5   25 1C
+00B7 F8              141                        MOV   R0,A                         ;00B7   F8
+00B8 760A            142                        MOV   @R0,#0AH                     ;00B8   76 0A
+00BA 151C            143                        DEC   1CH                          ;00BA   15 1C
+00BC E51B            144     Q00BC:             MOV   A,1BH                        ;00BC   E5 1B
+00BE B40B14          145                        CJNE  A,#0BH,Q00D5                 ;00BE   B4 0B 14
+00C1 E4              146                        CLR   A                            ;00C1   E4
+00C2 F51C            147                        MOV   1CH,A                        ;00C2   F5 1C
+00C4 FF              148                        MOV   R7,A                         ;00C4   FF
+00C5 7408            149     Q00C5:             MOV   A,#08H                       ;00C5   74 08
+00C7 2F              150                        ADD   A,R7                         ;00C7   2F
+00C8 F8              151                        MOV   R0,A                         ;00C8   F8
+00C9 E6              152                        MOV   A,@R0                        ;00C9   E6
+00CA FE              153                        MOV   R6,A                         ;00CA   FE
+00CB 7410            154                        MOV   A,#10H                       ;00CB   74 10
+00CD 2F              155                        ADD   A,R7                         ;00CD   2F
+00CE F8              156                        MOV   R0,A                         ;00CE   F8
+00CF A606            157                        MOV   @R0,06H                      ;00CF   A6 06
+00D1 0F              158                        INC   R7                           ;00D1   0F
+00D2 BF08F0          159                        CJNE  R7,#08H,Q00C5                ;00D2   BF 08 F0
+00D5 22              160     Q00D5:             RET                                ;00D5   22
+                     161     ;==========================================================================
+00D6 751880          162     Q00D6:             MOV   18H,#80H                     ;00D6   75 18 80
+00D9 E4              163                        CLR   A                            ;00D9   E4
+00DA F51A            164                        MOV   1AH,A                        ;00DA   F5 1A
+00DC E4              165     Q00DC:             CLR   A                            ;00DC   E4
+00DD F5A0            166                        MOV   P2,A                         ;00DD   F5 A0
+00DF 7410            167                        MOV   A,#10H                       ;00DF   74 10
+00E1 251A            168                        ADD   A,1AH                        ;00E1   25 1A
+00E3 F8              169                        MOV   R0,A                         ;00E3   F8
+00E4 E6              170                        MOV   A,@R0                        ;00E4   E6
+00E5 900181          171                        MOV   DPTR,#0181H                  ;00E5   90 01 81
+00E8 93              172                        MOVC  A,@A+DPTR                    ;00E8   93
+00E9 F580            173                        MOV   P0,A                         ;00E9   F5 80
+00EB 8518A0          174                        MOV   P2,18H                       ;00EB   85 18 A0
+00EE 7F05            175                        MOV   R7,#05H                      ;00EE   7F 05
+00F0 7E00            176                        MOV   R6,#00H                      ;00F0   7E 00
+00F2 120168          177                        LCALL Q0168                        ;00F2   12 01 68
+00F5 AF18            178                        MOV   R7,18H                       ;00F5   AF 18
+00F7 7801            179                        MOV   R0,#01H                      ;00F7   78 01
+00F9 EF              180                        MOV   A,R7                         ;00F9   EF
+00FA 08              181                        INC   R0                           ;00FA   08
+00FB 8001            182                        SJMP  Q00FE                        ;00FB   80 01
+00FD 03              183     Q00FD:             RR    A                            ;00FD   03
+00FE D8FD            184     Q00FE:             DJNZ  R0,Q00FD                     ;00FE   D8 FD
+0100 F518            185                        MOV   18H,A                        ;0100   F5 18
+0102 051A            186                        INC   1AH                          ;0102   05 1A
+0104 E51A            187                        MOV   A,1AH                        ;0104   E5 1A
+0106 C3              188                        CLR   C                            ;0106   C3
+0107 9408            189                        SUBB  A,#08H                       ;0107   94 08
+A51 MACRO ASSEMBLER  MAIN                                                                 12/20/2025 00:30:42 PAGE     4
+
+0109 40D1            190                        JC    Q00DC                        ;0109   40 D1
+010B 22              191                        RET                                ;010B   22
+                     192     ;==========================================================================
+010C 75900F          193     Q010C:             MOV   P1,#0FH                      ;010C   75 90 0F
+010F E590            194                        MOV   A,P1                         ;010F   E5 90
+0111 540F            195                        ANL   A,#0FH                       ;0111   54 0F
+0113 640F            196                        XRL   A,#0FH                       ;0113   64 0F
+0115 6028            197                        JZ    Q013F                        ;0115   60 28
+0117 7F0F            198                        MOV   R7,#0FH                      ;0117   7F 0F
+0119 7E00            199                        MOV   R6,#00H                      ;0119   7E 00
+011B 120168          200                        LCALL Q0168                        ;011B   12 01 68
+011E E590            201                        MOV   A,P1                         ;011E   E5 90
+0120 540F            202                        ANL   A,#0FH                       ;0120   54 0F
+0122 640F            203                        XRL   A,#0FH                       ;0122   64 0F
+0124 6016            204                        JZ    Q013C                        ;0124   60 16
+0126 E590            205                        MOV   A,P1                         ;0126   E5 90
+0128 540F            206                        ANL   A,#0FH                       ;0128   54 0F
+012A F519            207                        MOV   19H,A                        ;012A   F5 19
+012C E590            208     Q012C:             MOV   A,P1                         ;012C   E5 90
+012E 540F            209                        ANL   A,#0FH                       ;012E   54 0F
+0130 640F            210                        XRL   A,#0FH                       ;0130   64 0F
+0132 6005            211                        JZ    Q0139                        ;0132   60 05
+0134 1200D6          212                        LCALL Q00D6                        ;0134   12 00 D6
+0137 80F3            213                        SJMP  Q012C                        ;0137   80 F3
+0139 AF19            214     Q0139:             MOV   R7,19H                       ;0139   AF 19
+013B 22              215                        RET                                ;013B   22
+                     216     ;==========================================================================
+013C 7F0F            217     Q013C:             MOV   R7,#0FH                      ;013C   7F 0F
+013E 22              218                        RET                                ;013E   22
+                     219     ;==========================================================================
+013F 7F0F            220     Q013F:             MOV   R7,#0FH                      ;013F   7F 0F
+0141 22              221                        RET                                ;0141   22
+                     222     ;==========================================================================
+0142 E4              223     Q0142:             CLR   A                            ;0142   E4
+0143 FF              224                        MOV   R7,A                         ;0143   FF
+0144 7408            225     Q0144:             MOV   A,#08H                       ;0144   74 08
+0146 2F              226                        ADD   A,R7                         ;0146   2F
+0147 F8              227                        MOV   R0,A                         ;0147   F8
+0148 E6              228                        MOV   A,@R0                        ;0148   E6
+0149 FE              229                        MOV   R6,A                         ;0149   FE
+014A 7410            230                        MOV   A,#10H                       ;014A   74 10
+014C 2F              231                        ADD   A,R7                         ;014C   2F
+014D F8              232                        MOV   R0,A                         ;014D   F8
+014E A606            233                        MOV   @R0,06H                      ;014E   A6 06
+0150 0F              234                        INC   R7                           ;0150   0F
+0151 BF08F0          235                        CJNE  R7,#08H,Q0144                ;0151   BF 08 F0
+0154 E4              236                        CLR   A                            ;0154   E4
+0155 F51C            237                        MOV   1CH,A                        ;0155   F5 1C
+0157 22              238                        RET                                ;0157   22
+                     239     ;==========================================================================
+0158 120142          240     Q0158:             LCALL Q0142                        ;0158   12 01 42
+015B 12010C          241     Q015B:             LCALL Q010C                        ;015B   12 01 0C
+015E 8F1B            242                        MOV   1BH,R7                       ;015E   8F 1B
+0160 12008F          243                        LCALL Q008F                        ;0160   12 00 8F
+0163 1200D6          244                        LCALL Q00D6                        ;0163   12 00 D6
+0166 80F3            245                        SJMP  Q015B                        ;0166   80 F3
+0168 EF              246     Q0168:             MOV   A,R7                         ;0168   EF
+0169 D3              247                        SETB  C                            ;0169   D3
+016A 9400            248                        SUBB  A,#00H                       ;016A   94 00
+016C 4007            249                        JC    Q0175                        ;016C   40 07
+016E 7EEB            250                        MOV   R6,#0EBH                     ;016E   7E EB
+0170 DEFE            251                        DJNZ  R6,$                         ;0170   DE FE
+0172 1F              252                        DEC   R7                           ;0172   1F
+0173 80F3            253                        SJMP  Q0168                        ;0173   80 F3
+0175 22              254     Q0175:             RET                                ;0175   22
+                     255     ;==========================================================================
+A51 MACRO ASSEMBLER  MAIN                                                                 12/20/2025 00:30:42 PAGE     5
+
+0176 0808000A        256     Q0176:           DB  08H, 08H, 00H, 0AH, 0AH, 0AH, 0AH, 0AH     ;........
+017A 0A0A0A0A                
+017E 0A0A00C0        257     Q017E:           DB  0AH, 0AH, 00H,0C0H,0F9H,0A4H,0B0H, 99H     ;........
+0182 F9A4B099                
+0186 9282F880        258     Q0186:           DB  92H, 82H,0F8H, 80H, 90H,0FFH       ;......
+018A 90FF                    
+                     259     ;==========================================================================
+*** WARNING #A41 IN 259 (main.a51, LINE 259): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  MAIN                                                                 12/20/2025 00:30:42 PAGE     6
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+Q0000. . . . . . .  C ADDR   0000H   A   
+Q0003. . . . . . .  C ADDR   0003H   A   
+Q0006. . . . . . .  C ADDR   0006H   A   
+Q000F. . . . . . .  C ADDR   000FH   A   
+Q0012. . . . . . .  C ADDR   0012H   A   
+Q0016. . . . . . .  C ADDR   0016H   A   
+Q001E. . . . . . .  C ADDR   001EH   A   
+Q001F. . . . . . .  C ADDR   001FH   A   
+Q0024. . . . . . .  C ADDR   0024H   A   
+Q003C. . . . . . .  C ADDR   003CH   A   
+Q003D. . . . . . .  C ADDR   003DH   A   
+Q004A. . . . . . .  C ADDR   004AH   A   
+Q004D. . . . . . .  C ADDR   004DH   A   
+Q0063. . . . . . .  C ADDR   0063H   A   
+Q0074. . . . . . .  C ADDR   0074H   A   
+Q0089. . . . . . .  C ADDR   0089H   A   
+Q008F. . . . . . .  C ADDR   008FH   A   
+Q00A0. . . . . . .  C ADDR   00A0H   A   
+Q00A7. . . . . . .  C ADDR   00A7H   A   
+Q00BC. . . . . . .  C ADDR   00BCH   A   
+Q00C5. . . . . . .  C ADDR   00C5H   A   
+Q00D5. . . . . . .  C ADDR   00D5H   A   
+Q00D6. . . . . . .  C ADDR   00D6H   A   
+Q00DC. . . . . . .  C ADDR   00DCH   A   
+Q00FD. . . . . . .  C ADDR   00FDH   A   
+Q00FE. . . . . . .  C ADDR   00FEH   A   
+Q010C. . . . . . .  C ADDR   010CH   A   
+Q012C. . . . . . .  C ADDR   012CH   A   
+Q0139. . . . . . .  C ADDR   0139H   A   
+Q013C. . . . . . .  C ADDR   013CH   A   
+Q013F. . . . . . .  C ADDR   013FH   A   
+Q0142. . . . . . .  C ADDR   0142H   A   
+Q0144. . . . . . .  C ADDR   0144H   A   
+Q0158. . . . . . .  C ADDR   0158H   A   
+Q015B. . . . . . .  C ADDR   015BH   A   
+Q0168. . . . . . .  C ADDR   0168H   A   
+Q0175. . . . . . .  C ADDR   0175H   A   
+Q0176. . . . . . .  C ADDR   0176H   A   
+Q017E. . . . . . .  C ADDR   017EH   A   
+Q0186. . . . . . .  C ADDR   0186H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)

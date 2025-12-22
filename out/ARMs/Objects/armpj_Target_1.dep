@@ -1,0 +1,3 @@
+Dependencies for Project 'armpj', Target 'Target_1': (DO NOT MODIFY !)
+CompilerVersion: 6240000::V6.24::ARMCLANG
+F (.\main_c.s)(0x6948FF90)(--target=arm-arm-none-eabi -mcpu=cortex-m3 -masm=gnu -c-mlittle-endian -gdwarf-4 -Wa,-defsym,__EVAL=1-IC:/users/steamuser/AppData/Local/KeilARM_ARM/ARM/Cortex_DFP/1.1.0/Device/ARMCM3/Include-Wa,-defsym,__UVISION_VERSION=543 -Wa,-defsym,ARMCM3=1-o ./objects/main_c.o)

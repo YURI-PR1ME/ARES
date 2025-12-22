@@ -1,0 +1,55 @@
+C51 COMPILER V7.06   DELAY                                                                 07/19/2013 11:41:32 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE DELAY
+OBJECT MODULE PLACED IN .\output\delay.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE src\delay.c BROWSE DEBUG OBJECTEXTEND PRINT(.\delay.lst) OBJECT(.\output\de
+                    -lay.obj)
+
+stmt level    source
+
+   1          /************************************************************************************************** 
+   2          delay.c:延时程序,z=1，时为1ms
+   3          ***************************************************************************************************/
+   4          
+   5          #include "config.h"
+   6          
+   7          /*****************************24MHZ z=1时精确延时1ms***********************************************/
+   8          void delay1ms(uint16 z)
+   9          {
+  10   1              uint16 x,y;
+  11   1              for(x=z; x>0; x--)
+  12   1                      for(y=245; y>0; y--);
+  13   1      }
+  14          /***************************************************************************************************/
+  15          
+  16          
+  17          
+  18          
+  19          /************************24M晶振，1ms的延时成***************************************/
+  20          void delay1ms24m(uint16 x)
+  21          {
+  22   1              uint16 z;
+  23   1          uint16 y;
+  24   1          for(z=x;z>0;z--)
+  25   1                      for(y=246;y>0;y--);
+  26   1      
+  27   1      }
+  28          
+  29          
+  30          
+  31          /**********************************************************************************/
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     60    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

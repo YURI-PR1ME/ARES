@@ -1,0 +1,65 @@
+C51 COMPILER V7.06   DISPLAY_SMG8                                                          08/29/2013 23:36:46 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE DISPLAY_SMG8
+OBJECT MODULE PLACED IN .\OUTPUT\display_smg8.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE SRC\display_smg8.c BROWSE DEBUG OBJECTEXTEND PRINT(.\display_smg8.lst) OBJE
+                    -CT(.\OUTPUT\display_smg8.obj)
+
+stmt level    source
+
+   1          /******************************************
+   2          **display_smg8.c:8位数码管的显示程序文件
+   3          **void display_smg8(void)
+   4          **功能：8位数码管的显示
+   5          **IO:段码输出P0，位选口P2
+   6          **输入参数：显示内容uch8 dis_dat_smg8[8]，全局变量;
+   7          **输出参数：无。
+   8          **其他说明：
+   9          *******************************************/
+  10          
+  11          #include "config.h"
+  12          #include "intrins.h"
+  13          
+  14          uch8 code dis_code[]=
+  15          {
+  16                  0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0xff
+  17          };  //0    1    2    3    4    5   6     7    8    9   (10)     
+  18          
+  19          uch8 en_smg;
+  20          uch8 dis_dat_smg8[]=
+  21          {
+  22                  0,10,10,10,10,10,10,10
+  23          };
+  24          uch8 num;
+  25          void display_smg8()
+  26          {
+  27   1              uch8 i;
+  28   1              
+  29   1              en_smg=0x80;
+  30   1              for(i=0;i<8;i++)//8位数码管动态扫描显示
+  31   1              {       
+  32   2                      P2=0x00;//1、关位选
+  33   2                      P0=dis_code[dis_dat_smg8[i]];//2、输出字形码
+  34   2                      P2=en_smg;//3、开位选
+  35   2                      delay1ms(5);//4、延时
+  36   2                      en_smg=_cror_(en_smg,1);//5、获取下一个位选
+  37   2              }
+  38   1      }
+  39          
+  40          
+  41          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     54    ----
+   CONSTANT SIZE    =     11    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
