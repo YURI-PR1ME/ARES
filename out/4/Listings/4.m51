@@ -1,9 +1,9 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    12/19/2025  19:20:23  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    12/25/2025  11:01:15  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
-C:\USERS\YURI\APPDATA\LOCAL\KEIL_C51\A\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\main.obj TO .\Objects\4 PRINT (
->> .\Listings\4.m51) RAMSIZE (256)
+C:\USERS\STEAMUSER\APPDATA\LOCAL\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\main.obj TO .\Objects\4 PRINT
+>>  (.\Listings\4.m51) RAMSIZE (256)
 
 
 INPUT MODULES INCLUDED:
@@ -59,7 +59,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\4 (?C_STARTUP)
   N:0000H         SYMBOL        PPAGEENABLE
   D:00A0H         SYMBOL        PPAGE_SFR
   D:0081H         SYMBOL        SP
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  12/19/2025  19:20:23  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  12/25/2025  11:01:15  PAGE 2
 
 
   C:0800H         SYMBOL        STARTUP1
@@ -119,7 +119,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\4 (?C_STARTUP)
   C:002FH         LINE#         44
   C:0031H         LINE#         45
   C:0033H         LINE#         46
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  12/19/2025  19:20:23  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  12/25/2025  11:01:15  PAGE 3
 
 
   C:0034H         LINE#         47
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\4 (?C_STARTUP)
   C:00A0H         LINE#         102
   C:00A2H         LINE#         103
   C:00A3H         LINE#         104
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  12/19/2025  19:20:23  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  12/25/2025  11:01:15  PAGE 4
 
 
   C:00A5H         LINE#         105

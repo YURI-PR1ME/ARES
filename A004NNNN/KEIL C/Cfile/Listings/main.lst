@@ -1,0 +1,130 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              01/07/2026 21:45:19 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\users\steamuser\AppData\Local\Keil_v5\C51\BIN\C51.exe main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJE
+                    -CTEXTEND PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <intrins.h>  // ?? _nop_(),????????
+   3          
+   4          // ??????(?????,???????????)
+   5          unsigned char status = 1;  // ??? var09(???)
+   6          unsigned char counter = 0; // ??? var08(????)
+   7          
+   8          // ????(16??? + ???,???????)
+   9          void delay(unsigned char high, unsigned char low)
+  10          {
+  11   1          unsigned char h = high;
+  12   1          unsigned char l = low;
+  13   1          unsigned char i;
+  14   1          
+  15   1          while (h || l)
+  16   1          {
+  17   2              if (l == 0)
+  18   2              {
+  19   3                  if (h == 0) break;  // ????
+  20   3                  h--;
+  21   3                  l = 0xFF;
+  22   3              }
+  23   2              else
+  24   2              {
+  25   3                  l--;
+  26   3              }
+  27   2              
+  28   2              // ?????? 250 ?,???? _nop_() ?? Keil ?????
+  29   2              // ?? 12MHz ??,?????? 0.3~0.5s,???? 3~5s(????)
+  30   2              for (i = 0; i < 250; i++)
+  31   2              {
+  32   3                  _nop_(); _nop_(); _nop_(); _nop_(); _nop_();
+  33   3                  _nop_(); _nop_(); _nop_(); _nop_(); _nop_();
+  34   3              }
+  35   2          }
+  36   1      }
+  37          
+  38          void main(void)
+  39          {
+  40   1          SP = 0x09;  // ??????
+  41   1          
+  42   1          status = 1;
+  43   1          counter = 0;
+  44   1          
+  45   1          while (1)
+  46   1          {
+  47   2              switch (status)
+  48   2              {
+  49   3                  case 1:  // ????:???? + ???(????????)
+  50   3                      P0 = 0x33;  // 00110011 ? P0.0=1, P0.1=1, P0.2=0, P0.3=0, P0.4=1, P0.5=1
+  51   3                      // ???? LED ??????(???),??:P0 = ~0x33;  // ? 11001100
+  52   3                      delay(0xB8, 0x0B);
+  53   3                      status = 2;
+  54   3                      break;
+C51 COMPILER V9.60.7.0   MAIN                                                              01/07/2026 21:45:19 PAGE 2   
+
+  55   3                      
+  56   3                  case 2:  // ???? 12 ?(??? 0.4s ????,? 6 ????????)
+  57   3                      if (counter < 12)
+  58   3                      {
+  59   4                          P0 ^= 0x02;        // ?? P0.1(????)
+  60   4                          delay(0x2C, 0x01); // ???(?????,????)
+  61   4                          counter++;
+  62   4                          if (counter == 6)
+  63   4                          {
+  64   5                              P0 |= 0x04;    // ? 6 ???? P0.2
+  65   5                          }
+  66   4                      }
+  67   3                      else
+  68   3                      {
+  69   4                          counter = 0;
+  70   4                          status = 3;        // ????,???????
+  71   4                      }
+  72   3                      break;
+  73   3                      
+  74   3                  case 3:  // ????:???????? + ???
+  75   3                      P0 = 0x3A;  // 00111010 ? P0.0=0, P0.1=1, P0.2=1, P0.3=1, P0.4=1, P0.5=0
+  76   3                      // ???????,??:P0 = ~0x3A;  // ? 11000101
+  77   3                      delay(0xD0, 0x07);
+  78   3                      status = 4;
+  79   3                      break;
+  80   3                      
+  81   3                  case 4:  // ?????? 12 ?
+  82   3                      if (counter < 12)
+  83   3                      {
+  84   4                          P0 ^= 0x10;        // ?? P0.4
+  85   4                          delay(0x2C, 0x01);
+  86   4                          counter++;
+  87   4                          if (counter == 6)
+  88   4                          {
+  89   5                              P0 |= 0x20;    // ? 6 ???? P0.5
+  90   5                          }
+  91   4                      }
+  92   3                      else
+  93   3                      {
+  94   4                          counter = 0;
+  95   4                          status = 1;        // ??,???????
+  96   4                      }
+  97   3                      break;
+  98   3                      
+  99   3                  default:
+ 100   3                      status = 1;  // ????
+ 101   3                      break;
+ 102   3              }
+ 103   2          }
+ 104   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    179    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

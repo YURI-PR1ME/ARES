@@ -1,10 +1,10 @@
-A51 MACRO ASSEMBLER  MAIN                                                                 12/19/2025 19:20:23 PAGE     1
+A51 MACRO ASSEMBLER  MAIN                                                                 12/25/2025 11:01:15 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
 OBJECT MODULE PLACED IN .\Objects\main.obj
-ASSEMBLER INVOKED BY: C:\users\yuri\AppData\Local\Keil_C51\A\C51\BIN\A51.EXE main.a51 SET(SMALL) DEBUG PRINT(.\Listings\
-                      main.lst) OBJECT(.\Objects\main.obj) EP
+ASSEMBLER INVOKED BY: C:\users\steamuser\AppData\Local\Keil_v5\C51\BIN\A51.EXE main.a51 SET(SMALL) DEBUG PRINT(.\Listing
+                      s\main.lst) OBJECT(.\Objects\main.obj) EP
 
 LOC  OBJ            LINE     SOURCE
 
@@ -65,7 +65,7 @@ LOC  OBJ            LINE     SOURCE
 0045 B406E9           55                        CJNE  A,#06H,Q0031                 ;0045   B4 06 E9
 0048 D282             56                        SETB  P0.2                         ;0048   D2 82
 004A 80E5             57                        SJMP  Q0031                        ;004A   80 E5
-A51 MACRO ASSEMBLER  MAIN                                                                 12/19/2025 19:20:23 PAGE     2
+A51 MACRO ASSEMBLER  MAIN                                                                 12/25/2025 11:01:15 PAGE     2
 
 004C E4               58     Q004C:             CLR   A                            ;004C   E4
 004D F508             59                        MOV   08H,A                        ;004D   F5 08
@@ -124,7 +124,7 @@ LOC  OBJ            LINE     SOURCE
 00AF 020003          112                        LJMP  Q0003                        ;00AF   02 00 03
                      113     ;==========================================================================
 *** WARNING #A41 IN 113 (main.a51, LINE 113): MISSING 'END' STATEMENT
-A51 MACRO ASSEMBLER  MAIN                                                                 12/19/2025 19:20:23 PAGE     3
+A51 MACRO ASSEMBLER  MAIN                                                                 12/25/2025 11:01:15 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------
