@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    01/07/2026  21:45:19  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    01/07/2026  21:48:00  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -24,30 +24,33 @@ LINK MAP OF MODULE:  .\Objects\Cfiles (?C_STARTUP)
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
             DATA    0008H     0002H     UNIT         ?DT?MAIN
-            IDATA   000AH     0001H     UNIT         ?STACK
+            DATA    000AH     0002H     UNIT         _DATA_GROUP_
+            IDATA   000CH     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
                     0003H     07FDH                  *** GAP ***
             CODE    0800H     008CH     UNIT         ?C_C51STARTUP
             CODE    088CH     0087H     UNIT         ?PR?MAIN?MAIN
-            CODE    0913H     002CH     UNIT         ?PR?_DELAY?MAIN
-            CODE    093FH     0007H     UNIT         ?C_INITSEG
+            CODE    0913H     0032H     UNIT         ?PR?_DELAY?MAIN
+            CODE    0945H     0007H     UNIT         ?C_INITSEG
 
 
 
 OVERLAY MAP OF MODULE:   .\Objects\Cfiles (?C_STARTUP)
 
 
-SEGMENT
-  +--> CALLED SEGMENT
----------------------
-?C_C51STARTUP
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
   +--> ?PR?MAIN?MAIN
   +--> ?C_INITSEG
 
-?PR?MAIN?MAIN
+?PR?MAIN?MAIN                  -----    -----
   +--> ?PR?_DELAY?MAIN
+
+?PR?_DELAY?MAIN                000AH    0002H
 
 
 
@@ -56,12 +59,12 @@ SYMBOL TABLE OF MODULE:  .\Objects\Cfiles (?C_STARTUP)
   VALUE           TYPE          NAME
   ----------------------------------
 
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/07/2026  21:48:00  PAGE 2
+
+
   -------         MODULE        ?C_STARTUP
   C:0800H         SEGMENT       ?C_C51STARTUP
-  I:000AH         SEGMENT       ?STACK
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/07/2026  21:45:19  PAGE 2
-
-
+  I:000CH         SEGMENT       ?STACK
   C:0000H         PUBLIC        ?C_STARTUP
   D:00E0H         SYMBOL        ACC
   D:00F0H         SYMBOL        B
@@ -105,48 +108,52 @@ SYMBOL TABLE OF MODULE:  .\Objects\Cfiles (?C_STARTUP)
   D:0007H         SYMBOL        high
   D:0005H         SYMBOL        low
   -------         DO            
-  D:0003H         SYMBOL        h
-  D:0004H         SYMBOL        l
-  D:0006H         SYMBOL        i
+  D:0004H         SYMBOL        h
+  D:0006H         SYMBOL        l
+  D:000AH         SYMBOL        i
+  D:000BH         SYMBOL        k
   -------         ENDDO         
+  C:0913H         LINE#         7
+  C:0913H         LINE#         8
   C:0913H         LINE#         9
-  C:0913H         LINE#         10
-  C:0913H         LINE#         11
-  C:0915H         LINE#         12
-  C:0917H         LINE#         15
-  C:091DH         LINE#         16
-  C:091DH         LINE#         17
-  C:0920H         LINE#         18
-  C:0920H         LINE#         19
-  C:0923H         LINE#         20
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/07/2026  21:45:19  PAGE 3
+  C:0915H         LINE#         10
+  C:0917H         LINE#         13
+  C:091DH         LINE#         14
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/07/2026  21:48:00  PAGE 3
 
 
-  C:0924H         LINE#         21
-  C:0926H         LINE#         22
-  C:0928H         LINE#         24
-  C:0928H         LINE#         25
-  C:0929H         LINE#         26
-  C:0929H         LINE#         30
-  C:0931H         LINE#         31
-  C:0931H         LINE#         32
-  C:0936H         LINE#         33
-  C:093BH         LINE#         34
-  C:093EH         LINE#         35
-  C:093EH         LINE#         36
+  C:091DH         LINE#         15
+  C:0920H         LINE#         16
+  C:0920H         LINE#         17
+  C:0923H         LINE#         18
+  C:0924H         LINE#         19
+  C:0926H         LINE#         20
+  C:0928H         LINE#         22
+  C:0928H         LINE#         23
+  C:0929H         LINE#         24
+  C:0929H         LINE#         28
+  C:0933H         LINE#         29
+  C:0933H         LINE#         30
+  C:0936H         LINE#         31
+  C:093DH         LINE#         32
+  C:093DH         LINE#         33
+  C:093EH         LINE#         34
+  C:0940H         LINE#         35
+  C:0944H         LINE#         36
+  C:0944H         LINE#         37
   -------         ENDPROC       _DELAY
   -------         PROC          MAIN
-  C:088CH         LINE#         38
   C:088CH         LINE#         39
   C:088CH         LINE#         40
-  C:088FH         LINE#         42
-  C:0892H         LINE#         43
-  C:0895H         LINE#         45
+  C:088CH         LINE#         41
+  C:088FH         LINE#         43
+  C:0892H         LINE#         44
   C:0895H         LINE#         46
   C:0895H         LINE#         47
-  C:08A5H         LINE#         48
+  C:0895H         LINE#         48
   C:08A5H         LINE#         49
   C:08A5H         LINE#         50
+  C:08A5H         LINE#         51
   C:08A8H         LINE#         52
   C:08AFH         LINE#         53
   C:08B2H         LINE#         54
@@ -168,37 +175,37 @@ SYMBOL TABLE OF MODULE:  .\Objects\Cfiles (?C_STARTUP)
   C:08D7H         LINE#         72
   C:08D9H         LINE#         74
   C:08D9H         LINE#         75
-  C:08DCH         LINE#         77
-  C:08E3H         LINE#         78
-  C:08E6H         LINE#         79
+  C:08DCH         LINE#         76
+  C:08E3H         LINE#         77
+  C:08E6H         LINE#         78
+  C:08E8H         LINE#         80
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/07/2026  21:48:00  PAGE 4
+
+
   C:08E8H         LINE#         81
-  C:08E8H         LINE#         82
+  C:08EFH         LINE#         82
   C:08EFH         LINE#         83
-  C:08EFH         LINE#         84
-  C:08F2H         LINE#         85
-  C:08F9H         LINE#         86
-  C:08FBH         LINE#         87
+  C:08F2H         LINE#         84
+  C:08F9H         LINE#         85
+  C:08FBH         LINE#         86
+  C:0901H         LINE#         87
   C:0901H         LINE#         88
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/07/2026  21:45:19  PAGE 4
-
-
-  C:0901H         LINE#         89
+  C:0904H         LINE#         89
   C:0904H         LINE#         90
-  C:0904H         LINE#         91
+  C:0906H         LINE#         92
   C:0906H         LINE#         93
-  C:0906H         LINE#         94
-  C:0909H         LINE#         95
+  C:0909H         LINE#         94
+  C:090CH         LINE#         95
   C:090CH         LINE#         96
-  C:090CH         LINE#         97
+  C:090EH         LINE#         98
   C:090EH         LINE#         99
-  C:090EH         LINE#         100
-  C:0911H         LINE#         101
+  C:0911H         LINE#         100
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00C8H BYTE ( 9%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00CEH BYTE (10%) *
 ******************************************************************************
 
-Program Size: data=11.0 xdata=0 code=329
+Program Size: data=13.0 xdata=0 code=335
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
