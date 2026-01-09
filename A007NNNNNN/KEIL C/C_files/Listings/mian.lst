@@ -1,0 +1,204 @@
+C51 COMPILER V9.60.7.0   MIAN                                                              01/09/2026 23:38:13 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MIAN
+OBJECT MODULE PLACED IN .\Objects\mian.obj
+COMPILER INVOKED BY: C:\users\yuri\AppData\Local\Keil_C51\A\C51\BIN\C51.exe mian.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECT
+                    -EXTEND PRINT(.\Listings\mian.lst) TABS(2) OBJECT(.\Objects\mian.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <intrins.h>
+   3          
+   4          // ????
+   5          #define SEG_PORT P0  // ????
+   6          #define BIT_PORT P2  // ????
+   7          
+   8          // ????
+   9          unsigned char display_buffer[4] = {0};  // ?????,???? 0x08-0x0B
+  10          unsigned char bit_select = 0x01;        // ????,?? 0x1F
+  11          unsigned char display_index = 0;        // ????,?? 0x1E
+  12          unsigned int timer_value = 0;           // ????,?? 0x1C-0x1D
+  13          
+  14          // ???? (0-F)
+  15          const unsigned char seg_code[] = {
+  16              0xC0, // 0
+  17              0xF9, // 1
+  18              0xA4, // 2
+  19              0xB0, // 3
+  20              0x99, // 4
+  21              0x92, // 5
+  22              0x82, // 6
+  23              0xF8, // 7
+  24              0x80, // 8
+  25              0x90, // 9
+  26              0x88, // A
+  27              0x83, // b
+  28              0xC6, // C
+  29              0xA1, // d
+  30              0x86, // E
+  31              0x8E  // F
+  32          };
+  33          
+  34          // ???? - ?? Q017F
+  35          void delay_ms(unsigned char ms) {
+  36   1          while(ms--) {
+  37   2              unsigned char i = 235;
+  38   2              while(i--);
+  39   2          }
+  40   1      }
+  41          
+  42          // 16????? - ?? Q0113
+  43          unsigned int divide_16bit(unsigned int dividend, unsigned int divisor) {
+  44   1          if(divisor == 0) return 0;
+  45   1          
+  46   1          if(divisor < 256) {
+  47   2              // ?? Q0142-Q0167
+  48   2              unsigned char high = (unsigned char)(dividend >> 8);
+  49   2              unsigned char low = (unsigned char)(dividend & 0xFF);
+  50   2              unsigned char divisor_byte = (unsigned char)divisor;
+  51   2              
+  52   2              // ????
+  53   2              unsigned char quotient_high = high / divisor_byte;
+  54   2              unsigned char remainder_high = high % divisor_byte;
+C51 COMPILER V9.60.7.0   MIAN                                                              01/09/2026 23:38:13 PAGE 2   
+
+  55   2              
+  56   2              // ????
+  57   2              unsigned int temp = (remainder_high << 8) + low;
+  58   2              unsigned char quotient_low = temp / divisor_byte;
+  59   2              unsigned char remainder_low = temp % divisor_byte;
+  60   2              
+  61   2              return (quotient_high << 8) | quotient_low;
+  62   2          } else {
+  63   2              // ?? Q0121-Q013E
+  64   2              unsigned int quotient = 0;
+  65   2              unsigned int remainder = 0;
+  66   2              
+  67   2              for(unsigned char i = 0; i < 16; i++) {
+*** ERROR C141 IN LINE 67 OF mian.c: syntax error near 'unsigned', expected 'sizeof'
+*** ERROR C202 IN LINE 67 OF mian.c: 'i': undefined identifier
+*** ERROR C202 IN LINE 67 OF mian.c: 'i': undefined identifier
+*** ERROR C202 IN LINE 67 OF mian.c: 'i': undefined identifier
+*** ERROR C141 IN LINE 67 OF mian.c: syntax error near ')', expected ';'
+  68   3                  remainder = (remainder << 1) | ((dividend >> 15) & 1);
+  69   3                  dividend <<= 1;
+  70   3                  quotient <<= 1;
+  71   3                  
+  72   3                  if(remainder >= divisor) {
+  73   4                      remainder -= divisor;
+  74   4                      quotient |= 1;
+  75   4                  }
+  76   3              }
+  77   2              
+  78   2              return quotient;
+  79   2          }
+  80   1      }
+  81          
+  82          // ??????? - ?? Q008F-Q00E2
+  83          void update_display_buffer(void) {
+  84   1          unsigned int value = timer_value;
+  85   1          
+  86   1          // ???? (??1000)
+  87   1          display_buffer[0] = divide_16bit(value, 1000);
+  88   1          value = timer_value % 1000;
+  89   1          
+  90   1          // ???? (??100)
+  91   1          display_buffer[1] = divide_16bit(value, 100);
+  92   1          value = value % 100;
+  93   1          
+  94   1          // ???? (??10)
+  95   1          display_buffer[2] = divide_16bit(value, 10);
+  96   1          
+  97   1          // ??
+  98   1          display_buffer[3] = value % 10;
+  99   1          
+ 100   1          // ??????:??????????????????,????
+ 101   1          // ???????????????
+ 102   1          for(unsigned char i = 0; i < 4; i++) {
+*** ERROR C141 IN LINE 102 OF mian.c: syntax error near 'unsigned', expected 'sizeof'
+*** ERROR C202 IN LINE 102 OF mian.c: 'i': undefined identifier
+*** ERROR C202 IN LINE 102 OF mian.c: 'i': undefined identifier
+*** ERROR C202 IN LINE 102 OF mian.c: 'i': undefined identifier
+*** ERROR C141 IN LINE 102 OF mian.c: syntax error near ')', expected ';'
+ 103   2              display_buffer[i] = seg_code[display_buffer[i]];
+ 104   2          }
+ 105   1      }
+ 106          
+C51 COMPILER V9.60.7.0   MIAN                                                              01/09/2026 23:38:13 PAGE 3   
+
+ 107          // ???? - ?? Q00E3-Q0112
+ 108          void display_digits(void) {
+ 109   1          unsigned char i;
+ 110   1          
+ 111   1          for(i = 0; i < 4; i++) {
+ 112   2              // ???????
+ 113   2              BIT_PORT = 0x00;
+ 114   2              
+ 115   2              // ?????????
+ 116   2              unsigned char offset = i + 8;  // 0x08, 0x09, 0x0A, 0x0B
+*** ERROR C141 IN LINE 116 OF mian.c: syntax error near 'unsigned', expected '__asm'
+*** ERROR C202 IN LINE 116 OF mian.c: 'offset': undefined identifier
+ 117   2              unsigned char seg_index = display_buffer[i];
+*** ERROR C141 IN LINE 117 OF mian.c: syntax error near 'unsigned', expected '__asm'
+*** ERROR C202 IN LINE 117 OF mian.c: 'seg_index': undefined identifier
+ 118   2              
+ 119   2              // ?????
+ 120   2              SEG_PORT = seg_code[seg_index];
+*** ERROR C202 IN LINE 120 OF mian.c: 'seg_index': undefined identifier
+ 121   2              
+ 122   2              // ????????
+ 123   2              BIT_PORT = bit_select;
+ 124   2              
+ 125   2              // ????
+ 126   2              delay_ms(1);
+ 127   2              
+ 128   2              // ??????
+ 129   2              bit_select = _crol_(bit_select, 1);
+ 130   2          }
+ 131   1      }
+ 132          
+ 133          // ????? - ?? Q0195
+ 134          void system_init(void) {
+ 135   1          // ????????
+ 136   1          display_buffer[0] = 0;  // ??
+ 137   1          display_buffer[1] = 0;  // ??
+ 138   1          display_buffer[2] = 0;  // ??
+ 139   1          display_buffer[3] = 0;  // ??
+ 140   1          
+ 141   1          // ???????
+ 142   1          bit_select = 0x01;
+ 143   1          
+ 144   1          // ???????
+ 145   1          timer_value = 0;
+ 146   1          
+ 147   1          // ????
+ 148   1          SEG_PORT = 0xFF;
+ 149   1          BIT_PORT = 0x00;
+ 150   1      }
+ 151          
+ 152          // ??? - ?? Q018D-Q0193
+ 153          void main(void) {
+ 154   1          // ?????
+ 155   1          system_init();
+ 156   1          
+ 157   1          // ???
+ 158   1          while(1) {
+ 159   2              // ???????
+ 160   2              update_display_buffer();
+ 161   2              
+ 162   2              // ????
+ 163   2              display_digits();
+C51 COMPILER V9.60.7.0   MIAN                                                              01/09/2026 23:38:13 PAGE 4   
+
+ 164   2              
+ 165   2              // ??????
+ 166   2              timer_value++;
+ 167   2              if(timer_value > 9999) {
+ 168   3                  timer_value = 0;
+ 169   3              }
+ 170   2          }
+ 171   1      }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  15 ERROR(S)

@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\mian.obj" 
+TO ".\Objects\C_files" 
+PRINT(".\Listings\C_files.m51") RAMSIZE(256) 
