@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    01/09/2026  23:32:35  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    01/10/2026  13:07:21  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -13,7 +13,6 @@ INPUT MODULES INCLUDED:
   .\Objects\STARTUP.obj (?C_STARTUP)
   .\Objects\mian.obj (MIAN)
   C:\USERS\YURI\APPDATA\LOCAL\KEIL_C51\A\C51\LIB\C51S.LIB (?C_INIT)
-  C:\USERS\YURI\APPDATA\LOCAL\KEIL_C51\A\C51\LIB\C51S.LIB (?C?UIDIV)
 
 
 LINK MAP OF MODULE:  .\Objects\C_files (?C_STARTUP)
@@ -24,58 +23,52 @@ LINK MAP OF MODULE:  .\Objects\C_files (?C_STARTUP)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            DATA    0008H     0018H     UNIT         ?DT?MIAN
-            IDATA   0020H     0001H     UNIT         ?STACK
+            DATA    0008H     0012H     UNIT         ?DT?MIAN
+            DATA    001AH     0001H     UNIT         _DATA_GROUP_
+            IDATA   001BH     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
                     0003H     07FDH                  *** GAP ***
             CODE    0800H     008CH     UNIT         ?C_C51STARTUP
-            CODE    088CH     0055H     UNIT         ?C?LIB_CODE
-            CODE    08E1H     0053H     UNIT         ?PR?_CONVERT_TO_BCD?MIAN
-            CODE    0934H     002EH     UNIT         ?PR?DISPLAY_4_DIGIT?MIAN
-            CODE    0962H     0023H     UNIT         ?C_INITSEG
-            CODE    0985H     0022H     UNIT         ?PR?MAIN_DISPLAY_LOOP?MIAN
-            CODE    09A7H     0020H     UNIT         ?PR?_DELAY?MIAN
-            CODE    09C7H     0016H     UNIT         ?PR?SYSTEM_INIT?MIAN
-            CODE    09DDH     0006H     UNIT         ?PR?MAIN?MIAN
+            CODE    088CH     0028H     UNIT         ?PR?DISPLAY_DIGITS?MIAN
+            CODE    08B4H     0020H     UNIT         ?PR?_DELAY_MS?MIAN
+            CODE    08D4H     0017H     UNIT         ?C_INITSEG
+            CODE    08EBH     0013H     UNIT         ?PR?INIT?MIAN
+            CODE    08FEH     0008H     UNIT         ?PR?MAIN?MIAN
 
 
 
 OVERLAY MAP OF MODULE:   .\Objects\C_files (?C_STARTUP)
 
 
-SEGMENT
-  +--> CALLED SEGMENT
----------------------
-?C_C51STARTUP
+SEGMENT                           DATA_GROUP 
+  +--> CALLED SEGMENT           START    LENGTH
+-----------------------------------------------
+?C_C51STARTUP                   -----    -----
   +--> ?PR?MAIN?MIAN
   +--> ?C_INITSEG
 
-?PR?MAIN?MIAN
-  +--> ?PR?SYSTEM_INIT?MIAN
-  +--> ?PR?MAIN_DISPLAY_LOOP?MIAN
+?PR?MAIN?MIAN                   -----    -----
+  +--> ?PR?INIT?MIAN
+  +--> ?PR?DISPLAY_DIGITS?MIAN
 
-?PR?MAIN_DISPLAY_LOOP?MIAN
-  +--> ?PR?_CONVERT_TO_BCD?MIAN
-  +--> ?PR?DISPLAY_4_DIGIT?MIAN
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/09/2026  23:32:35  PAGE 2
-
-
-
-?PR?DISPLAY_4_DIGIT?MIAN
-  +--> ?PR?_DELAY?MIAN
+?PR?DISPLAY_DIGITS?MIAN         001AH    0001H
+  +--> ?PR?_DELAY_MS?MIAN
 
 
 
 SYMBOL TABLE OF MODULE:  .\Objects\C_files (?C_STARTUP)
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/10/2026  13:07:21  PAGE 2
+
+
 
   VALUE           TYPE          NAME
   ----------------------------------
 
   -------         MODULE        ?C_STARTUP
   C:0800H         SEGMENT       ?C_C51STARTUP
-  I:0020H         SEGMENT       ?STACK
+  I:001BH         SEGMENT       ?STACK
   C:0000H         PUBLIC        ?C_STARTUP
   D:00E0H         SYMBOL        ACC
   D:00F0H         SYMBOL        B
@@ -111,98 +104,66 @@ SYMBOL TABLE OF MODULE:  .\Objects\C_files (?C_STARTUP)
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
   D:00A0H         PUBLIC        P2
-  C:0934H         PUBLIC        display_4_digit
-  C:09A7H         PUBLIC        _delay
-  C:0985H         PUBLIC        main_display_loop
-  D:0008H         PUBLIC        timer_value
-  D:000AH         PUBLIC        bit_select
-  C:09DDH         PUBLIC        main
-  D:000BH         PUBLIC        seg_code
-  C:09C7H         PUBLIC        system_init
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/09/2026  23:32:35  PAGE 3
-
-
-  C:08E1H         PUBLIC        _convert_to_bcd
-  D:001BH         PUBLIC        display_index
-  D:001CH         PUBLIC        display_data
-  -------         PROC          _DELAY
+  C:08FEH         PUBLIC        main
+  C:08EBH         PUBLIC        init
+  D:0008H         PUBLIC        seg_code
+  C:08B4H         PUBLIC        _delay_ms
+  D:0012H         PUBLIC        display_buffer
+  C:088CH         PUBLIC        display_digits
+  -------         PROC          _DELAY_MS
   D:0006H         SYMBOL        ms
   -------         DO            
   D:0004H         SYMBOL        i
   D:0002H         SYMBOL        j
   -------         ENDDO         
-  C:09A7H         LINE#         35
-  C:09A7H         LINE#         37
-  C:09B1H         LINE#         38
-  C:09C6H         LINE#         39
-  -------         ENDPROC       _DELAY
-  -------         PROC          DISPLAY_4_DIGIT
+  C:08B4H         LINE#         28
+  C:08B4H         LINE#         30
+  C:08BEH         LINE#         31
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/10/2026  13:07:21  PAGE 3
+
+
+  C:08D3H         LINE#         32
+  -------         ENDPROC       _DELAY_MS
+  -------         PROC          DISPLAY_DIGITS
   -------         DO            
   D:0001H         SYMBOL        i
+  D:001AH         SYMBOL        bit_select
   -------         ENDDO         
-  C:0934H         LINE#         42
-  C:0934H         LINE#         46
-  C:0937H         LINE#         49
-  C:0938H         LINE#         51
-  C:093BH         LINE#         54
-  C:0946H         LINE#         57
-  C:0949H         LINE#         60
-  C:0950H         LINE#         63
-  C:095DH         LINE#         64
-  C:0961H         LINE#         65
-  -------         ENDPROC       DISPLAY_4_DIGIT
-  -------         PROC          _CONVERT_TO_BCD
-  D:0006H         SYMBOL        value
+  C:088CH         LINE#         35
+  C:088CH         LINE#         37
+  C:088FH         LINE#         39
+  C:0891H         LINE#         41
+  C:0894H         LINE#         44
+  C:089FH         LINE#         47
+  C:08A2H         LINE#         50
+  C:08A9H         LINE#         53
+  C:08AFH         LINE#         54
+  C:08B3H         LINE#         55
+  -------         ENDPROC       DISPLAY_DIGITS
+  -------         PROC          INIT
   -------         DO            
-  D:0002H         SYMBOL        temp
+  D:0007H         SYMBOL        i
   -------         ENDDO         
-  C:08E1H         LINE#         68
-  C:08E1H         LINE#         69
-  C:08E5H         LINE#         72
-  C:08EEH         LINE#         73
-  C:08FDH         LINE#         76
-  C:090AH         LINE#         77
-  C:0919H         LINE#         80
-  C:0926H         LINE#         81
-  C:0931H         LINE#         84
-  C:0933H         LINE#         85
-  -------         ENDPROC       _CONVERT_TO_BCD
-  -------         PROC          MAIN_DISPLAY_LOOP
-  C:0985H         LINE#         88
-  C:0985H         LINE#         90
-  C:0985H         LINE#         92
-  C:098DH         LINE#         93
-  C:099BH         LINE#         96
-  C:09A2H         LINE#         99
-  C:09A5H         LINE#         100
-  -------         ENDPROC       MAIN_DISPLAY_LOOP
-  -------         PROC          SYSTEM_INIT
-  C:09C7H         LINE#         104
-  C:09C7H         LINE#         106
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  01/09/2026  23:32:35  PAGE 4
-
-
-  C:09CAH         LINE#         107
-  C:09CDH         LINE#         108
-  C:09D0H         LINE#         109
-  C:09D3H         LINE#         112
-  C:09D6H         LINE#         115
-  C:09DCH         LINE#         116
-  -------         ENDPROC       SYSTEM_INIT
+  C:08EBH         LINE#         58
+  C:08EBH         LINE#         61
+  C:08EDH         LINE#         62
+  C:08F3H         LINE#         63
+  C:08F7H         LINE#         66
+  C:08FAH         LINE#         67
+  C:08FDH         LINE#         68
+  -------         ENDPROC       INIT
   -------         PROC          MAIN
-  C:09DDH         LINE#         119
-  C:09DDH         LINE#         121
-  C:09E0H         LINE#         124
+  C:08FEH         LINE#         71
+  C:08FEH         LINE#         72
+  C:0901H         LINE#         74
+  C:0901H         LINE#         75
+  C:0904H         LINE#         76
   -------         ENDPROC       MAIN
   -------         ENDMOD        MIAN
 
-  -------         MODULE        ?C?UIDIV
-  C:088CH         PUBLIC        ?C?UIDIV
-  -------         ENDMOD        ?C?UIDIV
-
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0110H BYTE (13%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0088H BYTE ( 6%) *
 ******************************************************************************
 
-Program Size: data=33.0 xdata=0 code=486
+Program Size: data=28.0 xdata=0 code=265
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
