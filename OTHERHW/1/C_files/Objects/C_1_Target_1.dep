@@ -1,0 +1,3 @@
+Dependencies for Project 'C_1', Target 'Target_1': (DO NOT MODIFY !)
+CompilerVersion: 6240000::V6.24::ARMCLANG
+F (.\1_main.c)(0x69635056)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-mlittle-endian -gdwarf-4 -O0 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-IC:/users/yuri/AppData/Local/Arm/Packs/ARM/Cortex_DFP/1.1.0/Device/ARMCM3/Include-D__UVISION_VERSION="543" -DARMCM3-o ./objects/1_main.o -MMD)
