@@ -1,0 +1,134 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              01/10/2026 13:50:17 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\users\yuri\AppData\Local\Keil_C51\A\C51\BIN\C51.exe main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECT
+                    -EXTEND PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          
+   3          #define uint unsigned int
+   4          #define uchar unsigned char
+   5          
+   6          // 定义数码管段码表（对应汇编中的 Q0181 处的数据）
+   7          // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 全灭
+   8          uchar code table[] = {
+   9              0xC0, 0xF9, 0xA4, 0xB0, 0x99, 
+  10              0x92, 0x82, 0xF8, 0x80, 0x90, 0xFF
+  11          };
+  12          
+  13          // 内存变量定义
+  14          uchar display_buf[8]; // 显示缓冲区 (对应汇编中 10H-17H)
+  15          uchar backup_buf[8];  // 备份缓冲区 (对应汇编中 08H-0FH)
+  16          uchar current_pos = 0; // 当前编辑位置 (对应汇编中的 1CH)
+  17          uchar key_val = 0;    // 按键值 (对应汇编中的 1BH)
+  18          
+  19          // 延时子程序 (对应汇编 Q0168)
+  20          void delay(uint t) {
+  21   1          while(t--);
+  22   1      }
+  23          
+  24          // 刷新数码管显示 (对应汇编 Q00D6)
+  25          void refresh_display() {
+  26   1          uchar i;
+  27   1          uchar scan_bit = 0x80; // 从最高位或最低位开始扫描
+  28   1          for(i = 0; i < 8; i++) {
+  29   2              P2 = 0; // 消隐
+  30   2              P0 = table[display_buf[i]]; // 送段码
+  31   2              P2 = scan_bit; // 送位选
+  32   2              delay(100);    // 扫描延时
+  33   2              
+  34   2              // 位选循环右移 (对应汇编 RR A)
+  35   2              if(scan_bit == 0x01) scan_bit = 0x80;
+  36   2              else scan_bit >>= 1;
+  37   2          }
+  38   1      }
+  39          
+  40          // 获取按键输入 (对应汇编 Q010C)
+  41          uchar get_key() {
+  42   1          uchar temp;
+  43   1          P1 = 0x0F;        // 设置低4位为输入
+  44   1          temp = P1 & 0x0F;
+  45   1          if(temp != 0x0F) { // 检测到按键按下
+  46   2              delay(1000);   // 消抖
+  47   2              temp = P1 & 0x0F;
+  48   2              if(temp != 0x0F) {
+  49   3                  uchar val = temp;
+  50   3                  // 等待按键释放并持续显示
+  51   3                  while((P1 & 0x0F) != 0x0F) {
+  52   4                      refresh_display();
+  53   4                  }
+  54   3                  return val; // 返回键值
+C51 COMPILER V9.60.7.0   MAIN                                                              01/10/2026 13:50:17 PAGE 2   
+
+  55   3              }
+  56   2          }
+  57   1          return 0x0F; // 无键按下
+  58   1      }
+  59          
+  60          // 按键逻辑处理 (对应汇编 Q008F)
+  61          void process_key(uchar k) {
+  62   1          if(k == 0x0E) { // 某个特定按键：光标右移/数值增加
+  63   2              current_pos++;
+  64   2              if(current_pos > 7) current_pos = 7;
+  65   2              display_buf[current_pos] = current_pos; 
+  66   2          } 
+  67   1          else if(k == 0x0D) { // 某个特定按键：回退/清零
+  68   2              if(current_pos >= 0) {
+  69   3                  display_buf[current_pos] = 0x0A; // 显示空白
+  70   3                  if(current_pos > 0) current_pos--;
+  71   3              }
+  72   2          }
+  73   1          else if(k == 0x0B) { // 某个特定按键：重置/复制
+  74   2              uchar i;
+  75   2              current_pos = 0;
+  76   2              for(i = 0; i < 8; i++) {
+  77   3                  display_buf[i] = backup_buf[i];
+  78   3              }
+  79   2          }
+  80   1      }
+  81          
+  82          // 初始化缓冲区 (对应汇编 Q0142)
+  83          void init_buffer() {
+  84   1          uchar i;
+  85   1          for(i = 0; i < 8; i++) {
+  86   2              backup_buf[i] = 0x0A; // 汇编 Q0176 定义的初始数据
+  87   2              display_buf[i] = backup_buf[i];
+  88   2          }
+  89   1        display_buf[0] = 0x00;
+  90   1          current_pos = 0;
+  91   1      }
+  92          
+  93          // 主程序
+  94          void main() {
+  95   1          // 汇编开头的内存清理逻辑
+  96   1          init_buffer();
+  97   1          
+  98   1          while(1) {
+  99   2              key_val = get_key();
+ 100   2              if(key_val != 0x0F) {
+ 101   3                  process_key(key_val);
+ 102   3              }
+ 103   2              refresh_display();
+ 104   2          display_buf[0] =0 ;
+ 105   2          }
+ 106   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    237    ----
+   CONSTANT SIZE    =     11    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.60.7.0   MAIN                                                              01/10/2026 13:50:17 PAGE 3   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

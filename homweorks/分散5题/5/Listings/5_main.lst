@@ -1,0 +1,239 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET, DATA, READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         
+    4 00000000         __Vectors
+    5 00000000 20001000        DCD              0x20001000  ; 栈顶地址 (Ini
+                                                            tial Stack Pointer)
+                                                            
+    6 00000004 00000000        DCD              __main      ; 复位向量 (Res
+                                                            et Vector)
+    7 00000008         
+    8 00000008         ; --- 定义数据段 ---
+    9 00000008                 AREA             MyData, DATA, READONLY
+   10 00000000 00000005 
+              00000008 
+              0000000C 
+              00000009 
+              0000000A 
+              00000003 
+              00000005 
+              00000007 
+              00000008 
+              0000000A 
+              00000016 
+              0000001F 
+              00000011 
+              00000010 
+              0000000D Array   DCD              5, 8, 12, 9, 10, 3, 5, 7, 8, 10
+, 22, 31, 17, 16, 13
+   11 0000003C         ArrayEnd
+   12 0000003C         
+   13 0000003C         ; --- 定义代码段 ---
+   14 0000003C                 AREA             |.text|, CODE, READONLY
+   15 00000000                 ENTRY                        ; 标记程序入�
+                                                            �
+   16 00000000                 EXPORT           __main
+   17 00000000         
+   18 00000000         __main
+   19 00000000         ; ------------------------------------------------------
+                       -----
+   20 00000000         ; 初始化堆栈
+   21 00000000         ; ------------------------------------------------------
+                       -----
+   22 00000000 E59FD038        LDR              SP, =0x20001000 ; 初始化堆�
+                                                            ��指针
+   23 00000004         
+   24 00000004         ; ------------------------------------------------------
+                       -----
+   25 00000004         ; 初始化变量
+   26 00000004         ; ------------------------------------------------------
+                       -----
+   27 00000004 E59F0038        LDR              R0, =Array  ; R0 = 数组的首
+                                                            地址
+   28 00000008 E59F7034        LDR              R7, =Array
+   29 0000000C E3A0100F        MOV              R1, #15     ; R1 = 循环次数
+                                                            
+   30 00000010 E3A0A000        MOV              R10, #0
+   31 00000014 E3A05000        MOV              R5, #0
+   32 00000018 E3A06000        MOV              R6, #0
+   33 0000001C         
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   34 0000001C         ; ------------------------------------------------------
+                       -----
+   35 0000001C         ; ARM/THUMB模式切换验证
+   36 0000001C         ; ------------------------------------------------------
+                       -----
+   37 0000001C         ; 首先在ARM模式下读取
+   38 0000001C E5902004        LDR              R2, [R0, #4] ; R2读取R0+4地�
+                                                            ��的值
+   39 00000020         
+   40 00000020         ; 切换到THUMB模式
+   41 00000020 E28F4001        ADR              R4, thumb_code + 1 ; 获取THUM
+                                                            B代码地址，最
+                                                            低位设为1
+   42 00000024 E12FFF14        BX               R4          ; 跳转到THUMB模
+                                                            式
+   43 00000028         
+   44 00000028         ; THUMB代码段
+   45 00000028                 CODE16
+   46 00000028         thumb_code
+   47 00000028 6843            LDR              R3, [R0, #4] ; R3读取R0+4地�
+                                                            ��的值
+   48 0000002A         ; 切换回ARM模式
+   49 0000002A A401            ADR              R4, arm_code
+   50 0000002C 4720            BX               R4
+   51 0000002E         
+   52 0000002E         ; ARM代码段
+   53 0000002E 00 00           CODE32
+   54 00000030         arm_code
+   55 00000030         ; 现在回到ARM模式，可以继续执行
+   56 00000030 E1A00000        NOP                          ; 占位符，可�
+                                                            �添加其他代码
+                                                            
+   57 00000034         
+   58 00000034         ; ------------------------------------------------------
+                       -----
+   59 00000034         ; 继续原来的循环
+   60 00000034         ; ------------------------------------------------------
+                       -----
+   61 00000034         Loop_Window
+   62 00000034 E3510000        CMP              R1, #0      ; 检查计数器
+   63 00000038 0AFFFFFF        BEQ              Stop        ; 结束
+   64 0000003C         
+   65 0000003C         ; 循环处理代码...
+   66 0000003C         ; 这里可以继续你的循环逻辑
+   67 0000003C         
+   68 0000003C         Stop
+   69 0000003C EAFFFFFE        B                Stop        ; 死循环
+   70 00000040         
+   71 00000040                 END
+              20001000 
+              00000000 
+Command Line: --debug --xref --diag_suppress=9931 --bi --apcs=interwork --depen
+d=.\objects\5_main.d -o.\objects\5_main.o -IC:\users\yuri\AppData\Local\Keil_V5
+_old\ARM\RV31\INC --predefine="__UVISION_VERSION SETA 536" --list=.\listings\5_
+main.lst 5_main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file 5_main.s
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 4 in file 5_main.s
+   Uses
+      At line 2 in file 5_main.s
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Array 00000000
+
+Symbol: Array
+   Definitions
+      At line 10 in file 5_main.s
+   Uses
+      At line 27 in file 5_main.s
+      At line 28 in file 5_main.s
+
+ArrayEnd 0000003C
+
+Symbol: ArrayEnd
+   Definitions
+      At line 11 in file 5_main.s
+   Uses
+      None
+Comment: ArrayEnd unused
+MyData 00000000
+
+Symbol: MyData
+   Definitions
+      At line 9 in file 5_main.s
+   Uses
+      None
+Comment: MyData unused
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 14 in file 5_main.s
+   Uses
+      None
+Comment: .text unused
+Loop_Window 00000034
+
+Symbol: Loop_Window
+   Definitions
+      At line 61 in file 5_main.s
+   Uses
+      None
+Comment: Loop_Window unused
+Stop 0000003C
+
+Symbol: Stop
+   Definitions
+      At line 68 in file 5_main.s
+   Uses
+      At line 63 in file 5_main.s
+      At line 69 in file 5_main.s
+
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 18 in file 5_main.s
+   Uses
+      At line 6 in file 5_main.s
+      At line 16 in file 5_main.s
+
+arm_code 00000030
+
+Symbol: arm_code
+   Definitions
+      At line 54 in file 5_main.s
+   Uses
+      At line 49 in file 5_main.s
+Comment: arm_code used once
+thumb_code 00000028
+
+Symbol: thumb_code
+   Definitions
+      At line 46 in file 5_main.s
+   Uses
+      At line 41 in file 5_main.s
+Comment: thumb_code used once
+6 symbols
+344 symbols in table

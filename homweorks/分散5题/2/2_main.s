@@ -1,0 +1,74 @@
+;============================================================================
+; 修复版：加入了 RESET 向量表，解决 L6236E 报错
+;============================================================================
+
+; --- 1. 定义中断向量表 (Vector Table) ---
+; 链接器必须找到名为 "RESET" 的段，并把它放在内存最开始的地方
+    AREA    RESET, DATA, READONLY
+    EXPORT  __Vectors
+
+__Vectors
+    DCD     0x20001000          ; 栈顶地址 (Initial Stack Pointer) - 随便给一个RAM地址即可
+    DCD     __main              ; 复位向量 (Reset Vector) - 程序启动后跳转到 __main
+    ; (这里省略了其他中断向量，对于练习足够了)
+
+; --- 2. 定义数据段 ---
+    AREA    MyData, DATA, READONLY
+Array   DCD     5, 8, 12, 9, 10, 3, 5, 7, 8, 10, 22, 31, 17, 16, 13
+ArrayEnd
+
+
+; --- 3. 定义代码段 ---
+    AREA    |.text|, CODE, READONLY
+    ENTRY                           ; 标记程序入口
+    EXPORT  __main
+
+__main
+    ; -----------------------------------------------------------
+    ; 初始化
+    ; -----------------------------------------------------------
+    LDR     R0, =Array              ; R0 = 数组的首地址
+    LDR     R7, =Array
+    MOV     R1, #15                 ; R1 = 循环次数 (15 - 3 + 1)
+    MOV     R10, #0
+    MOV     R5, #0
+    MOV     R6, #0
+    ; -----------------------------------------------------------
+    ; -----------------------------------------------------------
+Loop_Window
+    CMP     R1, #0                  ; 检查计数器
+    BEQ     Stop                    ; 结束
+    LDR     R4, [R0, #0]            ; 第1个数
+
+;    ;--- 找到数组最大值---
+Find_Max
+    CMP     R6, #14
+    BEQ     Find_End
+    LDR     R3, [R7, #0]            ; 第1个数
+    CMP     R3, R5          ; 比较R4和R5
+    BLE     compare1_ok     ; 如果R4 <= R5，跳过交换
+    MOV     R5, R3
+compare1_ok
+    ADD     R6, R6, #1
+    ADD     R7, R7, #4
+    B       Find_Max
+Find_End
+    ;--- 每个数除以最大值乘以100,用于归100%化---
+        MOV  R3, #100
+one_time
+        CMP  R10, #0
+        BNE  one_time_end
+        UDIV R5, R3, R5           ; mean = sum / 3
+        MOV  R10, #10
+one_time_end
+        MUL  R8, R4, R5
+; --- 滑动 ---
+    ADD     R0, R0, #4              ; 指针后移4字节
+    SUB     R1, R1, #1              ; 计数器-1
+    B       Loop_Window
+
+Stop
+    B       Stop                    ; 死循环
+
+    END
+

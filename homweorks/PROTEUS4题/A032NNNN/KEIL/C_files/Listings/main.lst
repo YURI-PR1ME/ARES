@@ -1,0 +1,95 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              01/10/2026 14:32:20 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\users\yuri\AppData\Local\Keil_C51\A\C51\BIN\C51.exe main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECT
+                    -EXTEND PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          
+   3          // 数码管段码表（共阳极，0-9）
+   4          code unsigned char seg_table[] = {
+   5              0xC0, 0xF9, 0xA4, 0xB0, 0x99,  // 0-4
+   6              0x92, 0x82, 0xF8, 0x80, 0x90   // 5-9
+   7          };
+   8          
+   9          unsigned char counter = 0;  // 计数器
+  10          
+  11          void timer0_init(void) {
+  12   1          TMOD = 0x06;  // 定时器0模式2（自动重装）
+  13   1          TH0 = 0xFF;   // 重装值
+  14   1          TL0 = 0xFF;   // 初值
+  15   1          ET0 = 1;      // 使能定时器0中断
+  16   1          TR0 = 1;      // 启动定时器0
+  17   1      }
+  18          
+  19          void ext0_init(void) {
+  20   1          EX0 = 1;      // 使能外部中断0
+  21   1          IT0 = 1;      // 下降沿触发
+  22   1      }
+  23          
+  24          void display_init(void) {
+  25   1          P0 = 0x3F;    // 显示0
+  26   1          P2 = 0x3F;    // 显示0
+  27   1      }
+  28          
+  29          void timer0_isr(void) interrupt 1 {
+  30   1          // 定时器0中断服务程序
+  31   1          counter++;
+  32   1          if (counter >= 100) {
+  33   2              counter = 0;
+  34   2          }
+  35   1      }
+  36          
+  37          void ext0_isr(void) interrupt 0 {
+  38   1          // 外部中断0服务程序
+  39   1          counter = 0;
+  40   1      }
+  41          
+  42          void main(void) {
+  43   1          unsigned char tens, units;
+  44   1          
+  45   1          // 初始化堆栈指针（汇编中MOV SP,#08H）
+  46   1          SP = 0x08;
+  47   1          
+  48   1          // 初始化
+  49   1          display_init();
+  50   1          timer0_init();
+  51   1          ext0_init();
+  52   1          
+  53   1          // 设置中断优先级（汇编中MOV IP,#02H）
+  54   1          IP = 0x02;  // 定时器0中断优先级高
+C51 COMPILER V9.60.7.0   MAIN                                                              01/10/2026 14:32:20 PAGE 2   
+
+  55   1          
+  56   1          EA = 1;     // 全局中断使能
+  57   1          
+  58   1          while(1) {
+  59   2              // 显示计数器值
+  60   2              tens = counter / 10;
+  61   2              units = counter % 10;
+  62   2              
+  63   2              // 显示十位数（P0口）
+  64   2              P0 = ~seg_table[tens];  // 汇编中CPL A取反了
+  65   2              
+  66   2              // 显示个位数（P2口）
+  67   2              P2 = ~seg_table[units];
+  68   2          }
+  69   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     98    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

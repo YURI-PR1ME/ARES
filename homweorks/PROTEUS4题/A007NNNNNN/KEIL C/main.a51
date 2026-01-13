@@ -1,0 +1,279 @@
+;==========================================================================
+;====Power Disassembler for MCS-51 and 6502================================
+;==========================================================================
+;   Writen by: 覃远高
+;   Copyright: 覃远高
+;    HomePage: http://coolsh.163.net
+;      E-mail: qinyg@163.net
+;         Tel: 0755-2282553
+;      Update: 3.Jul,2000
+;==========================================================================
+;===========Disassemble information========================================
+;==========================================================================
+;    File Name: C:\users\yuri\Desktop\ARES\A007NNNNNN\KEIL C\A007 8seg.hex
+;      IC Body: MCS-51  
+;         Date: 1/9/2026
+;==========================================================================
+;==========================================================================
+;标号==============指令================================地址===机器码=======
+;==========================================================================
+Q0000:             LJMP  Q0003                        ;0000   02 00 03
+;==========================================================================
+Q0003:             MOV   R0,#7FH                      ;0003   78 7F
+                   CLR   A                            ;0005   E4
+Q0006:             MOV   @R0,A                        ;0006   F6
+                   DJNZ  R0,Q0006                     ;0007   D8 FD
+                   MOV   SP,#1FH                      ;0009   75 81 1F
+                   LJMP  Q004A                        ;000C   02 00 4A
+;==========================================================================
+Q000F:             LJMP  Q018D                        ;000F   02 01 8D
+;==========================================================================
+Q0012:             CLR   A                            ;0012   E4
+                   MOVC  A,@A+DPTR                    ;0013   93
+                   INC   DPTR                         ;0014   A3
+                   MOV   R0,A                         ;0015   F8
+Q0016:             CLR   A                            ;0016   E4
+                   MOVC  A,@A+DPTR                    ;0017   93
+                   INC   DPTR                         ;0018   A3
+                   JC    Q001E                        ;0019   40 03
+                   MOV   @R0,A                        ;001B   F6
+                   SJMP  Q001F                        ;001C   80 01
+Q001E:             MOVX  @R0,A                        ;001E   F2
+Q001F:             INC   R0                           ;001F   08
+                   DJNZ  R7,Q0016                     ;0020   DF F4
+                   SJMP  Q004D                        ;0022   80 29
+Q0024:             CLR   A                            ;0024   E4
+                   MOVC  A,@A+DPTR                    ;0025   93
+                   INC   DPTR                         ;0026   A3
+                   MOV   R0,A                         ;0027   F8
+                   ANL   A,#07H                       ;0028   54 07
+                   ADD   A,#0CH                       ;002A   24 0C
+                   XCH   A,R0                         ;002C   C8
+                   CLR   C                            ;002D   C3
+                   RLC   A                            ;002E   33
+                   SWAP  A                            ;002F   C4
+                   ANL   A,#0FH                       ;0030   54 0F
+                   ORL   A,#20H                       ;0032   44 20
+                   XCH   A,R0                         ;0034   C8
+                   MOVC  A,@A+PC                      ;0035   83
+                   JC    Q003C                        ;0036   40 04
+                   CPL   A                            ;0038   F4
+                   ANL   A,@R0                        ;0039   56
+                   SJMP  Q003D                        ;003A   80 01
+Q003C:             ORL   A,@R0                        ;003C   46
+Q003D:             MOV   @R0,A                        ;003D   F6
+                   DJNZ  R7,Q0024                     ;003E   DF E4
+                   SJMP  Q004D                        ;0040   80 0B
+                   AJMP  0002H                        ;0042   01 02
+                   INC   A                            ;0044   04
+                   INC   R0                           ;0045   08
+                   JBC   24H.0,0089H                  ;0046   10 20 40
+                    DB		80H                       ;0049   80 90
+Q004A:             MOV   DPTR,#0168H                  ;004A   90 01 68
+Q004D:             CLR   A                            ;004D   E4
+                   MOV   R6,#01H                      ;004E   7E 01
+                   MOVC  A,@A+DPTR                    ;0050   93
+                   JZ    Q000F                        ;0051   60 BC
+                   INC   DPTR                         ;0053   A3
+                   MOV   R7,A                         ;0054   FF
+                   ANL   A,#3FH                       ;0055   54 3F
+                   JNB   ACC.5,Q0063                  ;0057   30 E5 09
+                   ANL   A,#1FH                       ;005A   54 1F
+                   MOV   R6,A                         ;005C   FE
+                   CLR   A                            ;005D   E4
+                   MOVC  A,@A+DPTR                    ;005E   93
+                   INC   DPTR                         ;005F   A3
+                   JZ    Q0063                        ;0060   60 01
+                   INC   R6                           ;0062   0E
+Q0063:             XCH   A,R7                         ;0063   CF
+                   ANL   A,#0C0H                      ;0064   54 C0
+                   ADD   A,ACC                        ;0066   25 E0
+                   JZ    Q0012                        ;0068   60 A8
+                   JC    Q0024                        ;006A   40 B8
+                   CLR   A                            ;006C   E4
+                   MOVC  A,@A+DPTR                    ;006D   93
+                   INC   DPTR                         ;006E   A3
+                   MOV   R2,A                         ;006F   FA
+                   CLR   A                            ;0070   E4
+                   MOVC  A,@A+DPTR                    ;0071   93
+                   INC   DPTR                         ;0072   A3
+                   MOV   R0,A                         ;0073   F8
+Q0074:             CLR   A                            ;0074   E4
+                   MOVC  A,@A+DPTR                    ;0075   93
+                   INC   DPTR                         ;0076   A3
+                   XCH   A,R0                         ;0077   C8
+                   XCH   A,DPL                        ;0078   C5 82
+                   XCH   A,R0                         ;007A   C8
+                   XCH   A,R2                         ;007B   CA
+                   XCH   A,DPH                        ;007C   C5 83
+                   XCH   A,R2                         ;007E   CA
+                   MOVX  @DPTR,A                      ;007F   F0
+                   INC   DPTR                         ;0080   A3
+                   XCH   A,R0                         ;0081   C8
+                   XCH   A,DPL                        ;0082   C5 82
+                   XCH   A,R0                         ;0084   C8
+                   XCH   A,R2                         ;0085   CA
+                   XCH   A,DPH                        ;0086   C5 83
+                   XCH   A,R2                         ;0088   CA
+Q0089:             DJNZ  R7,Q0074                     ;0089   DF E9
+                   DJNZ  R6,Q0074                     ;008B   DE E7
+                   SJMP  Q004D                        ;008D   80 BE
+Q008F:             MOV   1FH,#01H                     ;008F   75 1F 01
+                   MOV   R6,1CH                       ;0092   AE 1C
+                   MOV   R7,1DH                       ;0094   AF 1D
+                   MOV   R4,#03H                      ;0096   7C 03
+                   MOV   R5,#0E8H                     ;0098   7D E8
+                   LCALL Q0113                        ;009A   12 01 13
+                   MOV   08H,R7                       ;009D   8F 08
+                   MOV   R6,1CH                       ;009F   AE 1C
+                   MOV   R7,1DH                       ;00A1   AF 1D
+                   MOV   R4,#03H                      ;00A3   7C 03
+                   MOV   R5,#0E8H                     ;00A5   7D E8
+                   LCALL Q0113                        ;00A7   12 01 13
+                   MOV   R6,#00H                      ;00AA   7E 00
+                   MOV   R7,#64H                      ;00AC   7F 64
+                   XCH   A,R7                         ;00AE   CF
+                   XCH   A,R5                         ;00AF   CD
+                   XCH   A,R7                         ;00B0   CF
+                   XCH   A,R6                         ;00B1   CE
+                   XCH   A,R4                         ;00B2   CC
+                   XCH   A,R6                         ;00B3   CE
+                   LCALL Q0113                        ;00B4   12 01 13
+                   MOV   09H,R7                       ;00B7   8F 09
+                   MOV   R6,1CH                       ;00B9   AE 1C
+                   MOV   R7,1DH                       ;00BB   AF 1D
+                   MOV   R4,#00H                      ;00BD   7C 00
+                   MOV   R5,#64H                      ;00BF   7D 64
+                   LCALL Q0113                        ;00C1   12 01 13
+                   MOV   R6,#00H                      ;00C4   7E 00
+                   MOV   R7,#0AH                      ;00C6   7F 0A
+                   XCH   A,R7                         ;00C8   CF
+                   XCH   A,R5                         ;00C9   CD
+                   XCH   A,R7                         ;00CA   CF
+                   XCH   A,R6                         ;00CB   CE
+                   XCH   A,R4                         ;00CC   CC
+                   XCH   A,R6                         ;00CD   CE
+                   LCALL Q0113                        ;00CE   12 01 13
+                   MOV   0AH,R7                       ;00D1   8F 0A
+                   MOV   R6,1CH                       ;00D3   AE 1C
+                   MOV   R7,1DH                       ;00D5   AF 1D
+                   MOV   R4,#00H                      ;00D7   7C 00
+                   MOV   R5,#0AH                      ;00D9   7D 0A
+                   LCALL Q0113                        ;00DB   12 01 13
+                   MOV   0BH,R5                       ;00DE   8D 0B
+                   CLR   A                            ;00E0   E4
+                   MOV   1EH,A                        ;00E1   F5 1E
+Q00E3:             CLR   A                            ;00E3   E4
+                   MOV   P2,A                         ;00E4   F5 A0
+                   MOV   A,#08H                       ;00E6   74 08
+                   ADD   A,1EH                        ;00E8   25 1E
+                   MOV   R0,A                         ;00EA   F8
+                   MOV   A,@R0                        ;00EB   E6
+                   ADD   A,#0CH                       ;00EC   24 0C
+                   MOV   R0,A                         ;00EE   F8
+                   MOV   A,@R0                        ;00EF   E6
+                   MOV   P0,A                         ;00F0   F5 80
+                   MOV   P2,1FH                       ;00F2   85 1F A0
+                   MOV   R7,#01H                      ;00F5   7F 01
+                   MOV   R6,#00H                      ;00F7   7E 00
+                   LCALL Q017F                        ;00F9   12 01 7F
+                   MOV   R7,1FH                       ;00FC   AF 1F
+                   MOV   R0,#01H                      ;00FE   78 01
+                   MOV   A,R7                         ;0100   EF
+                   INC   R0                           ;0101   08
+                   SJMP  Q0105                        ;0102   80 01
+Q0104:             RL    A                            ;0104   23
+Q0105:             DJNZ  R0,Q0104                     ;0105   D8 FD
+                   MOV   1FH,A                        ;0107   F5 1F
+                   INC   1EH                          ;0109   05 1E
+                   MOV   A,1EH                        ;010B   E5 1E
+                   CLR   C                            ;010D   C3
+                   SUBB  A,#04H                       ;010E   94 04
+                   JC    Q00E3                        ;0110   40 D1
+                   RET                                ;0112   22
+;==========================================================================
+Q0113:             CJNE  R4,#00H,Q0121                ;0113   BC 00 0B
+                   CJNE  R6,#00H,Q0142                ;0116   BE 00 29
+                   MOV   A,R7                         ;0119   EF
+                   MOV   B,R5                         ;011A   8D F0
+                   DIV   AB                           ;011C   84
+                   MOV   R7,A                         ;011D   FF
+                   MOV   R5,B                         ;011E   AD F0
+                   RET                                ;0120   22
+;==========================================================================
+Q0121:             CLR   A                            ;0121   E4
+                   XCH   A,R4                         ;0122   CC
+                   MOV   R0,A                         ;0123   F8
+                   MOV   B,#08H                       ;0124   75 F0 08
+Q0127:             MOV   A,R7                         ;0127   EF
+                   ADD   A,R7                         ;0128   2F
+                   MOV   R7,A                         ;0129   FF
+                   MOV   A,R6                         ;012A   EE
+                   RLC   A                            ;012B   33
+                   MOV   R6,A                         ;012C   FE
+                   MOV   A,R4                         ;012D   EC
+                   RLC   A                            ;012E   33
+                   MOV   R4,A                         ;012F   FC
+                   MOV   A,R6                         ;0130   EE
+                   SUBB  A,R5                         ;0131   9D
+                   MOV   A,R4                         ;0132   EC
+                   SUBB  A,R0                         ;0133   98
+                   JC    Q013B                        ;0134   40 05
+                   MOV   R4,A                         ;0136   FC
+                   MOV   A,R6                         ;0137   EE
+                   SUBB  A,R5                         ;0138   9D
+                   MOV   R6,A                         ;0139   FE
+                   INC   R7                           ;013A   0F
+Q013B:             DJNZ  B,Q0127                      ;013B   D5 F0 E9
+                   CLR   A                            ;013E   E4
+                   XCH   A,R6                         ;013F   CE
+                   MOV   R5,A                         ;0140   FD
+                   RET                                ;0141   22
+;==========================================================================
+Q0142:             MOV   A,R5                         ;0142   ED
+                   MOV   R0,A                         ;0143   F8
+                   MOV   B,A                          ;0144   F5 F0
+                   MOV   A,R6                         ;0146   EE
+                   DIV   AB                           ;0147   84
+                   JB    OV,Q0167                     ;0148   20 D2 1C
+                   MOV   R6,A                         ;014B   FE
+                   MOV   R5,B                         ;014C   AD F0
+                   MOV   B,#08H                       ;014E   75 F0 08
+Q0151:             MOV   A,R7                         ;0151   EF
+                   ADD   A,R7                         ;0152   2F
+                   MOV   R7,A                         ;0153   FF
+                   MOV   A,R5                         ;0154   ED
+                   RLC   A                            ;0155   33
+                   MOV   R5,A                         ;0156   FD
+                   JC    Q0160                        ;0157   40 07
+                   SUBB  A,R0                         ;0159   98
+                   JNC   Q0162                        ;015A   50 06
+                   DJNZ  B,Q0151                      ;015C   D5 F0 F2
+                   RET                                ;015F   22
+;==========================================================================
+Q0160:             CLR   C                            ;0160   C3
+                   SUBB  A,R0                         ;0161   98
+Q0162:             MOV   R5,A                         ;0162   FD
+                   INC   R7                           ;0163   0F
+                   DJNZ  B,Q0151                      ;0164   D5 F0 EA
+Q0167:             RET                                ;0167   22
+;==========================================================================
+Q0168:		 DB  10H, 0CH,0C0H,0F9H,0A4H,0B0H, 99H, 92H	;........
+Q0170:		 DB  82H,0F8H, 80H, 90H, 88H, 83H,0C6H,0A1H	;........
+Q0178:		 DB  86H, 8EH, 02H, 1CH, 10H,0ABH, 00H	;.......
+;==========================================================================
+Q017F:             MOV   A,R7                         ;017F   EF
+                   SETB  C                            ;0180   D3
+                   SUBB  A,#00H                       ;0181   94 00
+                   JC    Q018C                        ;0183   40 07
+                   MOV   R6,#0EBH                     ;0185   7E EB
+                   DJNZ  R6,$                         ;0187   DE FE
+                   DEC   R7                           ;0189   1F
+                   SJMP  Q017F                        ;018A   80 F3
+Q018C:             RET                                ;018C   22
+;==========================================================================
+Q018D:             LCALL Q0195                        ;018D   12 01 95
+Q0190:             LCALL Q008F                        ;0190   12 00 8F
+                   SJMP  Q0190                        ;0193   80 FB
+Q0195:             RET                                ;0195   22
+;==========================================================================
